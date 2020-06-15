@@ -12,6 +12,7 @@
 #include <list>
 #include <queue>
 #include <stack>
+#include <string>
 
 #define DT_DIR 4
 
