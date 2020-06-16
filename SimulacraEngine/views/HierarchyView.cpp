@@ -5,7 +5,6 @@
 //  Created by Alex Dragutoiu on 09/06/2020.
 //  Copyright © 2020 Alex Dragutoiu. All rights reserved.
 //
-
 #include "HierarchyView.hpp"
 
 HierarchyView::HierarchyView() { }
@@ -20,60 +19,36 @@ void HierarchyView::drawListOfObjectsToAdd() {
     ImGui::Button("Add");
 }
 
-
 void HierarchyView::drawHierarchy() {
-    ImGui::BeginChild("GameObjects", ImVec2(0, 600), true);
-    if (ImGui::TreeNode("Grid")) {
-        
-        for (int i = 0; i < 4 * 4; i++) {
-            ImGui::PushID(i);
-            if (ImGui::Selectable("A", selected[i] != 0, 0, ImVec2(30, 30))) {
-                // Toggle
-                selected[i] = !selected[i];
-            }
-            if ((i % 4) < 3) ImGui::SameLine();
-            ImGui::PopID();
-        }
-        ImGui::TreePop();
-    }
-    if (ImGui::TreeNode("Main Menu")) {
-        ImGui::Selectable("Background");
-        ImGui::Selectable("Start");
-        ImGui::Selectable("Options");
-        ImGui::Selectable("Credits");
-        ImGui::Selectable("Quit");
-        
-        ImGui::TreePop();
-    }
+    ImGui::BeginChild("states", ImVec2(0, 600), true);
     
-    if (ImGui::TreeNode("Level 1")) {
-        ImGui::Text("Player");
-        if (ImGui::TreeNode("Map")) {
-            ImGui::Selectable("Background");
-            ImGui::Selectable("TileMap");
-            
-            ImGui::TreePop();
-        }
-        ImGui::TreePop();
-    }
     
-    if (ImGui::TreeNode("Level 2")) {
-        ImGui::Selectable("Background");
-        ImGui::TreePop();
-    }
+    //    if (ImGui::TreeNode("Grid")) {
+    //        for (int i = 0; i < 4 * 4; i++) {
+    //            ImGui::PushID(i);
+    //            if (ImGui::Selectable("A", selected[i] != 0, 0, ImVec2(30, 30))) {
+    //                // Toggle
+    //                selected[i] = !selected[i];
+    //            }
+    //            if ((i % 4) < 3) ImGui::SameLine();
+    //            ImGui::PopID();
+    //        }
+    //        ImGui::TreePop();
+    //    }
+    
+    
     ImGui::EndChild();
 }
 
 void HierarchyView::draw() {
     bool open = true;
     ImGui::Begin("hierarchy", &open);
-    ImGui::SetWindowFontScale(2.f);
+        ImGui::SetWindowFontScale(2.f);
     
-    drawHierarchy();
+        drawHierarchy();
     
-    ImGui::Text("Add Objects to Hierarchy");
-    
-    drawListOfObjectsToAdd();
+        //    ImGui::Text("Add Objects to Hierarchy");
+        //    drawListOfObjectsToAdd();
     ImGui::End();
 }
 

@@ -29,6 +29,8 @@ public:
     void draw(std::shared_ptr<sf::RenderWindow>& target) override;
     void update(const sf::Time& dt) override;
     
+    std::string toString() override;
+    
     // Constructors & Destructors
     GameState(GameEngine* context);
     ~GameState();

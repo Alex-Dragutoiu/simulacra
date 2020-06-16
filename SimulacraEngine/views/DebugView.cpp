@@ -36,7 +36,6 @@ void DebugView::draw() {
             ImGui::Text("Layer %d", i + 1);
             ImGui::BulletText("Dimensions: X:%2.f, Y:%2.f", layers[i]->getDimension().x, layers[i]->getDimension().y);
             ImGui::BulletText("Sprites Rendered: %.2f", layers[i]->getDimension().x / 384);
-            ImGui::BulletText("Offset: %i", layers[i]->getOffset());
             
             ImGui::Separator();
         }

@@ -1,34 +1,35 @@
 #include "GameEngine.hpp"
+
 #include "../states/EditorState.hpp"
-#include "../states/MenuState.hpp"
 
-GameEngine::GameEngine(int w, int h, std::string name) {
-    std::vector<sf::VideoMode> VideoModes = sf::VideoMode::getFullscreenModes();
-    
-    window = std::make_shared<sf::RenderWindow>(sf::VideoMode(VideoModes[0].width, VideoModes[0].height, VideoModes[0].bitsPerPixel), name, sf::Style::Fullscreen);
-
-    // Set window's frame limit
-    window->setFramerateLimit(60);
-    
-    pushState(std::make_shared<EditorState>(this));
-    
-    width = w;
-    height = h;
+GameEngine::GameEngine(int width, int height, std::string name) {
+    this->width = width;
+    this->height = height;
     this->name = name;
+    
     init();
 }
 
 GameEngine::~GameEngine() {
-    while (!states.empty()) {
-        popState();
-    }
     ImGui::SFML::Shutdown();
 }
 
 void GameEngine::init() {
+    std::vector<sf::VideoMode> VideoModes = sf::VideoMode::getFullscreenModes();
+    window = std::make_shared<sf::RenderWindow>(sf::VideoMode(VideoModes[0].width,
+                                                              VideoModes[0].height,
+                                                              VideoModes[0].bitsPerPixel),
+                                                name,
+                                                sf::Style::Fullscreen);
     
+    /* Set window's frame limit */
+    window->setFramerateLimit(60);
+
+    /* add state to the state manager */
+    stateManager.addState(std::make_unique<EditorState>(this));
+    
+    /* initialise ImGui */
     ImGui::SFML::Init(*window);
-    
     
     ImGuiStyle* style = &ImGui::GetStyle();
     
@@ -109,7 +110,8 @@ void GameEngine::eventHandler() {
         if(event.type == event.Closed) {
             window->close();
         }
-        getCurrentState()->handleEvents(event);
+        
+        stateManager.getCurrentState().handleEvents(event);
     }
 }
 
@@ -131,7 +133,7 @@ void GameEngine::run() {
 void GameEngine::update() {
     dt = clock.getElapsedTime();
     
-    getCurrentState()->update(dt);
+    stateManager.getCurrentState().update(dt);
     
     ImGui::SFML::Update(*window, dt);
     
@@ -142,25 +144,15 @@ void GameEngine::draw() {
     // clear the window
     window->clear(sf::Color(214, 245, 214));
     
-    getCurrentState()->draw(window);
+    stateManager.getCurrentState().draw(window);
+    
+    /* draw Views */
+    statesView.draw();
     
     ImGui::SFML::Render(*window);
     
     // display on window
     window->display();
-}
-
-void GameEngine::popState() {
-    states.back();
-    states.pop_back();
-}
-
-void GameEngine::pushState(std::shared_ptr<State> nextState) {
-    states.push_back(nextState);
-}
-
-std::shared_ptr<State> GameEngine::getCurrentState() {
-    return (states.empty()) ? nullptr : states.back();
 }
 
 std::shared_ptr<sf::RenderWindow> GameEngine::getWindow() {

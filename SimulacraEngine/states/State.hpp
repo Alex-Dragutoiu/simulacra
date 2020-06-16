@@ -24,5 +24,9 @@ public:
     virtual ~State() {
         
     };
+    
+    virtual std::string toString() {
+        return "State";
+    };
 };
 

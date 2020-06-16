@@ -106,7 +106,7 @@ void MenuState::update(const sf::Time& dt) {
 
 void MenuState::handleEvents(sf::Event& event) {
     if (start.isPressed()) {
-        context->pushState(std::make_shared<GameState>(context));
+        
     }
     
     if (options.isPressed()) {
@@ -120,4 +120,8 @@ void MenuState::handleEvents(sf::Event& event) {
     if (quit.isPressed()) {
         context->getWindow()->close();
     }
+}
+
+std::string MenuState::toString() {
+    return "MenuState";
 }

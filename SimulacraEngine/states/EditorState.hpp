@@ -34,7 +34,6 @@ private:
     /* context of the state */
     GameEngine* context;
     
-    TextureLoader texLoader;
     Player player;
     std::shared_ptr<sf::View> camera;
     
@@ -53,6 +52,8 @@ public:
     void handleEvents(sf::Event& event) override;
     void draw(std::shared_ptr<sf::RenderWindow>& target) override;
     void update(const sf::Time& dt) override;
+    
+    std::string toString() override;
     
     EditorState(GameEngine* context);
     ~EditorState();

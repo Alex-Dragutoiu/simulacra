@@ -47,6 +47,9 @@ public:
     void handleEvents(sf::Event& event) override;
     void draw(std::shared_ptr<sf::RenderWindow>& target) override;
     void update(const sf::Time& dt) override;
+    
+    std::string toString() override;
+    
     MenuState(GameEngine* context);
     ~MenuState();
 };

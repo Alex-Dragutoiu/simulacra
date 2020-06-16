@@ -64,6 +64,10 @@ void EditorState::draw(std::shared_ptr<sf::RenderWindow>& target) {
     
     player.draw(target.get());
     
+    // set view to default so you can draw HUDs
+    context->getWindow()->setView(context->getWindow()->getDefaultView());
+
+    /** \todo draw HUD */
 }
 
 void EditorState::update(const sf::Time& dt) {
@@ -84,4 +88,8 @@ void EditorState::update(const sf::Time& dt) {
     parallax->update(dt, cameraMove);
     
     player.update(dt.asSeconds());
+}
+
+std::string EditorState::toString() {
+    return "EditorState";
 }

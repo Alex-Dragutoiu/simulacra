@@ -25,6 +25,8 @@ private:
     float speed;
     
 public:
+    
+    
     // gets position of the player on the map
     sf::Vector2f getPosition();
     sf::Vector2f getOrigin();

@@ -44,9 +44,10 @@ public:
         xDim = sprite.getTextureRect().width;
         yDim = sprite.getTextureRect().height;
         
-        /* scale the background so that it fits the view */
-        sprite.setScale(camera->getSize().x / sprite.getTextureRect().width * 1.6f,
-                        camera->getSize().y / sprite.getTextureRect().height);
+//        /* scale the background so that it fits the view */
+//        sprite.setScale(camera->getSize().x / sprite.getTextureRect().width * 1.6f,
+//                        camera->getSize().y / sprite.getTextureRect().height);
+        
         
         sprite.setTextureRect(sf::IntRect(0, 0, xDim, yDim));
         sprite.setPosition(position);
@@ -56,8 +57,8 @@ public:
     
     void update(const sf::Time& dt, const float& cameraMove) {
         xOffset += cameraMove;
-        if (abs(xOffset) > camera->getSize().x) {
-            xDim += xOffset;
+        if (abs(xOffset) >= camera->getSize().x) {
+            xDim += xOffset / 100.f * factor;
             sprite.setTextureRect(sf::IntRect(0, 0, xDim, yDim));
             xOffset = 0;
         }

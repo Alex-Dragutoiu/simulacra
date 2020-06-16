@@ -20,7 +20,7 @@
 #include "imgui-SFML.h"
 
 class HierarchyView {
-    // Variables
+// Variables
 private:
     const char* names[9] = {
         "A", "B", "C",

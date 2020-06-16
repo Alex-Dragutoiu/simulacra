@@ -60,4 +60,6 @@ void GameState::update(const sf::Time& dt) {
     
 }
 
-
+std::string GameState::toString() {
+    return "GameState";
+}

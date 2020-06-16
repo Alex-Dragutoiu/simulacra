@@ -16,7 +16,7 @@ Player::Player(int x, int y) : animation(.10f) /*, lines(sf::LinesStrip, 5) */ {
     sprite.setTexture(*texture);
     sprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
     sprite.setPosition(x, y);
-    sprite.setScale(10.f, 10.f);
+    //    sprite.setScale(10.f, 10.f);
     
     //        lines[0].position = sprite.getPosition();
     //        lines[1].position = sf::Vector2f(sprite.getGlobalBounds().width, 0);
