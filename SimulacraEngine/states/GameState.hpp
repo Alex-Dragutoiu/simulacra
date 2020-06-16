@@ -18,9 +18,7 @@ private:
     GameEngine* context;
     sf::View view;
     sf::Texture background;
-    
-    void initView();
-    
+            
 public:
     void init() override;
     

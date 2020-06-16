@@ -8,9 +8,13 @@
 
 #include "EditorState.hpp"
 
-EditorState::EditorState(GameEngine* context) : player(0, 1200) {
-    this->context = context;
-    init();
+EditorState::EditorState(GameEngine* context) : player(0, -1000) {
+	this->context = context;
+	init();
+
+	/* attach camera to the player */
+	player.addCamera(camera);
+
 }
 
 EditorState::~EditorState() { }
@@ -19,15 +23,14 @@ void EditorState::init() {
     /* initialise the camera */
     camera = std::make_shared<sf::View>(sf::FloatRect(0, 0, context->getWindow()->sf::Window::getSize().x
                                                           , context->getWindow()->sf::Window::getSize().y));
-    
-    /* initialise parallax scrolling */
+	/* initialise parallax scrolling */
     parallax = std::make_unique<ParallaxBackground>(camera);
     parallax->addLayer("Resources/backgrounds/parallax/plx-2.png", sf::Vector2f(0, 0), .9f);
     parallax->addLayer("Resources/backgrounds/parallax/plx-3.png", sf::Vector2f(0, 0), .5f);
     parallax->addLayer("Resources/backgrounds/parallax/plx-4.png", sf::Vector2f(0, 0), .3f);
     parallax->addLayer("Resources/backgrounds/parallax/plx-5.png", sf::Vector2f(0, 0), .1f);
     
-    debugView.addModel(*parallax);
+    debugView.addModel(*parallax, player);
     
 }
 

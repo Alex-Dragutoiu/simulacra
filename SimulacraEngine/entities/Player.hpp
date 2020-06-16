@@ -16,6 +16,7 @@ enum MovementState { IDLE = 0, LEFT, RIGHT };
 class Player {
 private:
     std::shared_ptr<sf::Texture> texture;
+	std::shared_ptr<sf::View> camera;
     sf::Sprite sprite;
     sf::VertexArray lines;
     
@@ -25,7 +26,6 @@ private:
     float speed;
     
 public:
-    
     
     // gets position of the player on the map
     sf::Vector2f getPosition();
@@ -38,4 +38,5 @@ public:
     void move(const float dt, const float xDir, const float yDir);
     void update(const float dt);
     void draw(sf::RenderTarget* target);
+	void addCamera(std::shared_ptr<sf::View> cameraRef);
 };

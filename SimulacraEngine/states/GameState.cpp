@@ -11,7 +11,6 @@
 GameState::GameState(GameEngine* context) {
     this->context = context;
     init();
-    initView();
 }
 
 GameState::~GameState() {
@@ -19,11 +18,7 @@ GameState::~GameState() {
 }
 
 void GameState::init() {
-    
-}
-
-void GameState::initView() {
-    view.setCenter(context->getWindow()->getSize().x / 2, context->getWindow()->getSize().y / 2);
+	view.setCenter(context->getWindow()->getSize().x / 2, context->getWindow()->getSize().y / 2);
 }
 
 void GameState::handleEvents(sf::Event& event) {
