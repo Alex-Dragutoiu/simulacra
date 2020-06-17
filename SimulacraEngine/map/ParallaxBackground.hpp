@@ -19,6 +19,7 @@ struct Layer {
 private:
     std::shared_ptr<sf::Texture> image;
     std::shared_ptr<sf::View> camera;
+	
     
     /* the speed at which each sprite moves respective to the camera */
     float factor;
@@ -44,9 +45,9 @@ public:
         xDim = sprite.getTextureRect().width;
         yDim = sprite.getTextureRect().height;
         
-//        /* scale the background so that it fits the view */
-//        sprite.setScale(camera->getSize().x / sprite.getTextureRect().width * 1.6f,
-//                        camera->getSize().y / sprite.getTextureRect().height);
+       /* scale the background so that it fits the view */
+        sprite.setScale(camera->getSize().x / sprite.getTextureRect().width * 1.6f,
+	                    camera->getSize().y / sprite.getTextureRect().height);
         
         
         sprite.setTextureRect(sf::IntRect(0, 0, xDim, yDim));

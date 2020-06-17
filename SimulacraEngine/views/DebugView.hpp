@@ -11,6 +11,7 @@
 
 #include "imgui.h"
 #include "imgui-SFML.h"
+#include "../entities/Player.hpp"
 
 #include "../map/ParallaxBackground.hpp"
 
@@ -19,14 +20,15 @@ private: /* Variables */
     /* Model */
     std::shared_ptr<sf::View> camera;
     ParallaxBackground parallax;
+	Player player;
     
     
 public: /* Methods */
     void draw();
-    void addModel(const ParallaxBackground& parallax);
+    void addModel(const ParallaxBackground& parallax, const Player& player);
     
     DebugView();
-    DebugView(const ParallaxBackground& parallax);
+    DebugView(const ParallaxBackground &parallax, const Player& player);
     ~DebugView();
     
 };

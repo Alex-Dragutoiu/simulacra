@@ -7,14 +7,15 @@
 //
 #include "DebugView.hpp"
 
-DebugView::DebugView() : parallax(nullptr) { }
+DebugView::DebugView() : parallax(nullptr), player(0,0) { }
 
-DebugView::DebugView(const ParallaxBackground& parallax) : parallax(parallax) { }
+DebugView::DebugView(const ParallaxBackground &parallax, const Player& player) : parallax(parallax), player(player) { }
 
 DebugView::~DebugView() { }
 
-void DebugView::addModel(const ParallaxBackground &parallax) {
+void DebugView::addModel(const ParallaxBackground &parallax, const Player& player) {
     this->parallax = parallax;
+	this->player = player;
 }
 
 void DebugView::draw() {
@@ -31,6 +32,13 @@ void DebugView::draw() {
         ImGui::BulletText("Center Position: X:%.2f, Y:%.2f", parallax.getCamera().getCenter().x, parallax.getCamera().getCenter().y);
         
         ImGui::Separator();
+
+		ImGui::SetWindowFontScale(2.f);
+		ImGui::Text("Player");
+		ImGui::BulletText("Center Position: X:%.2f, Y:%.2f", player.getPosition().x, player.getPosition().y);
+
+		ImGui::Separator();
+
         
         for (int i = 0; i < layers.size(); i++) {
             ImGui::Text("Layer %d", i + 1);

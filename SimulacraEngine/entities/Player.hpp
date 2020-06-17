@@ -15,6 +15,7 @@
 class Player {
 private:
     std::shared_ptr<sf::Texture> texture;
+	std::shared_ptr<sf::View> camera;
     sf::Sprite sprite;
     sf::VertexArray lines;
     
@@ -36,4 +37,5 @@ public:
     void move(const float dt, const float xDir, const float yDir);
     void update(const float dt);
     void draw(sf::RenderTarget* target);
+	void addCamera(std::shared_ptr<sf::View> cameraRef);
 };

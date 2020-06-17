@@ -48,4 +48,3 @@ sf::View ParallaxBackground::getCamera() {
 void ParallaxBackground::addCamera(const std::shared_ptr<sf::View> camera) {
     this->camera = camera;
 }
-

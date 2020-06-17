@@ -42,8 +42,19 @@ sf::Vector2f Player::getOrigin() {
 }
 
 void Player::move(const float dt, const float xDir, const float yDir) {
-    sprite.move(dt * xDir * speed, dt * yDir * speed);
+
+	float newPosX = this->getPosition().x + dt * xDir * speed;
+
+	if(newPosX >= 0)
+		// Only allow player to move on positive X axis.
+		sprite.move(dt * xDir * speed, dt * yDir * speed);
+
+	// Check for camera boundary - should not go on negative values 
+	if(this->getPosition().x >= camera->getSize().x / 2)
+		// Move the camera along.
+		camera->move(dt * xDir * speed, dt * yDir * speed);
 }
+
 
 void Player::update(const float dt) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
@@ -61,4 +72,15 @@ void Player::update(const float dt) {
 void Player::draw(sf::RenderTarget* target) {
     target->draw(sprite);
     // target->draw(lines);
+}
+
+void Player::addCamera(std::shared_ptr<sf::View> cameraRef){
+	this->camera = cameraRef;
+
+	// Make camera centered on player 
+	// Apply camera boundary given player initial position 
+	if (this->getPosition().x < camera->getCenter().x / 2)
+		camera->setCenter(camera->getCenter());
+	else
+		camera->setCenter(this->getPosition().x, camera->getCenter().y);
 }
