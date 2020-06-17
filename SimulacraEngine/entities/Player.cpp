@@ -9,7 +9,7 @@
 
 // Constructors & Destructor
 Player::Player(int x, int y) : animation(.10f) /*, lines(sf::LinesStrip, 5) */ {
-    movement = IDLE;
+    movement = simulacra::IDLE;
     texture = std::make_shared<sf::Texture>();
     texture->loadFromFile("Resources/entities/player/character_sheet.png");
     
@@ -48,12 +48,12 @@ void Player::move(const float dt, const float xDir, const float yDir) {
 void Player::update(const float dt) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         move(dt, -1.f, 0.f);
-        sprite.setTextureRect(animation.update(dt, LEFT));
+        sprite.setTextureRect(animation.update(dt, simulacra::LEFT));
     } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         move(dt, 1.f, 0.f);
-        sprite.setTextureRect(animation.update(dt, RIGHT));
+        sprite.setTextureRect(animation.update(dt, simulacra::RIGHT));
     } else {
-        sprite.setTextureRect(animation.update(dt, IDLE));
+        sprite.setTextureRect(animation.update(dt, simulacra::IDLE));
     }
     
 }

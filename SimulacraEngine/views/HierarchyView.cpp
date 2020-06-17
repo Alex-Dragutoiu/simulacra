@@ -7,7 +7,10 @@
 //
 #include "HierarchyView.hpp"
 
-HierarchyView::HierarchyView() { }
+HierarchyView::HierarchyView() {
+    states.push_back("MenuState");
+    selected = 0;
+}
 
 HierarchyView::~HierarchyView() { }
 
@@ -15,40 +18,29 @@ void HierarchyView::drawListOfObjectsToAdd() {
     ImGui::BeginChild("AddObjects", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()), true);
     
     ImGui::EndChild();
-    
     ImGui::Button("Add");
 }
 
 void HierarchyView::drawHierarchy() {
-    ImGui::BeginChild("states", ImVec2(0, 600), true);
     
-    
-    //    if (ImGui::TreeNode("Grid")) {
-    //        for (int i = 0; i < 4 * 4; i++) {
-    //            ImGui::PushID(i);
-    //            if (ImGui::Selectable("A", selected[i] != 0, 0, ImVec2(30, 30))) {
-    //                // Toggle
-    //                selected[i] = !selected[i];
-    //            }
-    //            if ((i % 4) < 3) ImGui::SameLine();
-    //            ImGui::PopID();
-    //        }
-    //        ImGui::TreePop();
-    //    }
-    
-    
+    ImGui::BeginChild("states", ImVec2(0, states.size() * 50), true);
+        for (int i = 0; i < states.size(); i++) {
+            if (ImGui::Selectable(states[i].c_str(), selected == i, ImGuiSelectableFlags_AllowDoubleClick)) {
+                selected = i;
+                if (ImGui::IsMouseDoubleClicked(0)) {
+                }
+            }
+        }
     ImGui::EndChild();
 }
 
-void HierarchyView::draw() {
-    bool open = true;
-    ImGui::Begin("hierarchy", &open);
+void HierarchyView::draw(bool isOpen) {
+    /* Transparent background */
+    ImGui::SetNextWindowBgAlpha(0.8f);
+    
+    ImGui::Begin("States", &isOpen);
         ImGui::SetWindowFontScale(2.f);
-    
         drawHierarchy();
-    
-        //    ImGui::Text("Add Objects to Hierarchy");
-        //    drawListOfObjectsToAdd();
     ImGui::End();
 }
 
@@ -124,3 +116,15 @@ void HierarchyView::draw() {
 //    }
 //    ImGui::TreePop();
 //}
+//    if (ImGui::TreeNode("Grid")) {
+//        for (int i = 0; i < 4 * 4; i++) {
+//            ImGui::PushID(i);
+//            if (ImGui::Selectable("A", selected[i] != 0, 0, ImVec2(30, 30))) {
+//                // Toggle
+//                selected[i] = !selected[i];
+//            }
+//            if ((i % 4) < 3) ImGui::SameLine();
+//            ImGui::PopID();
+//        }
+//        ImGui::TreePop();
+//    }

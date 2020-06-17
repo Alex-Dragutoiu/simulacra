@@ -1,12 +1,9 @@
 #include "GameEngine.hpp"
 
-#include "../states/EditorState.hpp"
-
 GameEngine::GameEngine(int width, int height, std::string name) {
     this->width = width;
     this->height = height;
     this->name = name;
-    
     init();
 }
 
@@ -26,7 +23,7 @@ void GameEngine::init() {
     window->setFramerateLimit(60);
 
     /* add state to the state manager */
-    stateManager.addState(std::make_unique<EditorState>(this));
+    stateManager.addState(std::make_unique<MenuState>(this));
     
     /* initialise ImGui */
     ImGui::SFML::Init(*window);
@@ -147,7 +144,7 @@ void GameEngine::draw() {
     stateManager.getCurrentState().draw(window);
     
     /* draw Views */
-    statesView.draw();
+    statesView.draw(true);
     
     ImGui::SFML::Render(*window);
     

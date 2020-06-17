@@ -13,6 +13,8 @@
 #include "State.hpp"
 #include "../engine/GameEngine.hpp"
 
+class GameEngine;
+
 class GameState : public State {
 private:
     GameEngine* context;

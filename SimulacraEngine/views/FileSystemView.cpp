@@ -40,29 +40,7 @@ void FileSystemView::drawMenuBar() {
     }
 }
 
-/* This is a combo that displays the current selected directory
- * you switch to the contents of other directories that are currently inside
- * the current selected directory
- */
-//void FileSystemView::drawCombo() {
-//    if (ImGui::BeginCombo("files", comboLabel, flags)) {
-//        for (int i = 0; i < currentFile->children.size(); i++) {
-//            if (currentFile->children[i]->type == DT_DIR) {
-//                const bool is_selected = i;
-//                if (ImGui::Selectable(currentFile->children[i]->name.c_str(), is_selected)) {
-//                    itemCurrentIndex = i;
-//                    comboLabel = currentFile->children[i]->name.c_str();
-//                }
-//
-//                // Set the initial focus when opening the combo (scrolling + keyboardnavigation focus)
-//                if (is_selected) {
-//                    ImGui::SetItemDefaultFocus();
-//                }
-//            }
-//        }
-//        ImGui::EndCombo();
-//    }
-//}
+
 
 void FileSystemView::drawLeftPanel() {
     ImGui::BeginGroup();
@@ -250,3 +228,26 @@ bool FileSystemView::isDir(FileItem& file) const {
 //
 //                            ImGui::GetForegroundDrawList()->AddRect(vMin, vMax, IM_COL32(179, 179, 179, 255));
 //                        }
+/* This is a combo that displays the current selected directory
+ * you switch to the contents of other directories that are currently inside
+ * the current selected directory
+ */
+//void FileSystemView::drawCombo() {
+//    if (ImGui::BeginCombo("files", comboLabel, flags)) {
+//        for (int i = 0; i < currentFile->children.size(); i++) {
+//            if (currentFile->children[i]->type == DT_DIR) {
+//                const bool is_selected = i;
+//                if (ImGui::Selectable(currentFile->children[i]->name.c_str(), is_selected)) {
+//                    itemCurrentIndex = i;
+//                    comboLabel = currentFile->children[i]->name.c_str();
+//                }
+//
+//                // Set the initial focus when opening the combo (scrolling + keyboardnavigation focus)
+//                if (is_selected) {
+//                    ImGui::SetItemDefaultFocus();
+//                }
+//            }
+//        }
+//        ImGui::EndCombo();
+//    }
+//}

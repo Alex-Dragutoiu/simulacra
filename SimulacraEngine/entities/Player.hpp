@@ -10,8 +10,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "../components/animation/Animation.hpp"
-
-enum MovementState { IDLE = 0, LEFT, RIGHT };
+#include "../enums.h"
 
 class Player {
 private:
@@ -20,12 +19,11 @@ private:
     sf::VertexArray lines;
     
     Animation animation;
-    MovementState movement;
+    simulacra::MovementState movement;
     
     float speed;
     
 public:
-    
     
     // gets position of the player on the map
     sf::Vector2f getPosition();

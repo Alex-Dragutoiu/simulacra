@@ -9,10 +9,6 @@
 
 #include <iostream>
 #include <memory>
-#include <vector>
-#include <map>
-#include <dirent.h>
-#include <stack>
 
 #include <SFML/Graphics.hpp>
 
@@ -22,16 +18,9 @@
 class HierarchyView {
 // Variables
 private:
-    const char* names[9] = {
-        "A", "B", "C",
-        "D", "E", "F",
-        "G", "H", "I"
-    };
-    int mode = 0;
-    int selected[4 * 4] = { 1, 0, 0, 0,
-                            0, 1, 0, 0,
-                            0, 0, 1, 0,
-                            0, 0, 0, 1 };
+    std::vector<std::string> states;
+    
+    int selected;
     
     // Methods
 private:
@@ -39,9 +28,19 @@ private:
     void drawListOfObjectsToAdd();
     
 public:
-    void draw();
+    void draw(bool isOpen);
     
     HierarchyView();
     ~HierarchyView();
 };
 
+//    const char* names[9] = {
+//        "A", "B", "C",
+//        "D", "E", "F",
+//        "G", "H", "I"
+//    };
+//    int mode = 0;
+//    int selected[4 * 4] = { 1, 0, 0, 0,
+//                            0, 1, 0, 0,
+//                            0, 0, 1, 0,
+//                            0, 0, 0, 1 };

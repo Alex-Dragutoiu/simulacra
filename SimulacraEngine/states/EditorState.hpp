@@ -5,13 +5,13 @@
 //  Created by Alex Dragutoiu on 09/06/2020.
 //  Copyright © 2020 Alex Dragutoiu. All rights reserved.
 //
-
 #pragma once
 
 #include <iostream>
 #include <memory>
 
 #include "State.hpp"
+
 #include "../utilities/Axis.hpp"
 
 #include "../engine/GameEngine.hpp"
@@ -23,12 +23,14 @@
 #include "../entities/Player.hpp"
 #include "../map/ParallaxBackground.hpp"
 
+class GameEngine;
+
 class EditorState : public State {
-    // Variables
+/* Variables */
 private:
     /* Views */
     FileSystemView fileView;
-    HierarchyView hierView;
+//    HierarchyView hierView;
     DebugView debugView;
     
     /* context of the state */
@@ -39,10 +41,9 @@ private:
     
     float limit = 0;
     
-    //    Axis axis;
     std::unique_ptr<ParallaxBackground> parallax;
     
-    // Methods
+/* Methods */
 private:
     
 public:

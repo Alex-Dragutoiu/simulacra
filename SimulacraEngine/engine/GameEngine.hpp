@@ -12,12 +12,15 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "../states/EditorState.hpp"
+#include "../states/MenuState.hpp"
+
+class State;
+
 class GameEngine {
 private:
     /* manages states */
     StateManager stateManager;
-    
-    //    std::vector<std::shared_ptr<State>> states;
     
     std::shared_ptr<sf::RenderWindow> window;
     
@@ -38,13 +41,6 @@ public:
     
     // the game loop
     void run();
-    
-    //    // set current to new state
-    //    void pushState(std::shared_ptr<State> nextState);
-    //    void popState();
-    
-//    /* gets the state at the top of the stack */
-//    std::shared_ptr<State> getCurrentState();
     
     void init();
     

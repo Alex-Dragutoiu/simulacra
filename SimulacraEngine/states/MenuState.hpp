@@ -11,11 +11,17 @@
 #include <memory>
 
 #include "State.hpp"
+#include "GameState.hpp"
 
 #include "../gui/Button.hpp"
 #include "../gui/TextBox.hpp"
 
 #include "../engine/GameEngine.hpp"
+#include "../utilities/AssetLoader.hpp"
+
+#include "../defines.h"
+
+class GameEngine;
 
 class MenuState : public State {
     // Variables
@@ -31,14 +37,14 @@ private:
     std::shared_ptr<sf::Texture> texture;
     sf::Sprite backgroundImage;
     
-    Button start;
-    Button options;
-    Button credits;
-    Button quit;
+    std::unordered_map<std::string, simulacra::Button> buttons;
     
-    // Functions
+//    simulacra::Button start;
+//    simulacra::Button options;
+//    simulacra::Button credits;
+//    simulacra::Button quit;
 private:
-    void initText(sf::Text& text, std::string string, sf::Font* font, float charSize, float x, float y, sf::Color colour);
+    void initButtons();
     
 public:
     void init() override;

@@ -10,7 +10,11 @@
 
 StateManager::StateManager() { }
 
-StateManager::~StateManager() { }
+StateManager::~StateManager() {
+    while(!states.empty()) {
+        states.pop_back();
+    }
+}
 
 State& StateManager::getCurrentState() {
     return *states.back();
