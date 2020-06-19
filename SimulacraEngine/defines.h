@@ -11,7 +11,7 @@
 
 #define FONT "Resources/fonts/TextPixelFont.ttf"
 
-#define SIZE 128
+#define CHARACTER_SIZE 128
 #define MAIN_MENU_X_POS 40
 #define MAIN_MENU_Y_POS 0
 

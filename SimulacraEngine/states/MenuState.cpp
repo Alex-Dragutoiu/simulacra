@@ -20,27 +20,27 @@ MenuState::~MenuState() { }
 
 void MenuState::initButtons() {
     simulacra::Button start(context->getWindow()->getSize().x / 3, MAIN_MENU_X_POS + 128 * 2,
-                            SIZE, "Start",
+							CHARACTER_SIZE, "Start",
                             sf::Color::White, sf::Color::Red, sf::Color::White);
     start.setFont(*font);
     buttons["START"] = start;
     
     
     simulacra::Button settings(context->getWindow()->getSize().x / 3, MAIN_MENU_X_POS + 128 * 3,
-                               SIZE, "Settings",
+							   CHARACTER_SIZE, "Settings",
                                sf::Color::White, sf::Color::Red, sf::Color::White);
     settings.setFont(*font);
     buttons["SETTINGS"] = settings;
     
     
     simulacra::Button credits(context->getWindow()->getSize().x / 3, MAIN_MENU_X_POS + 128 * 4,
-                              SIZE, "Credits",
+							  CHARACTER_SIZE, "Credits",
                               sf::Color::White, sf::Color::Red, sf::Color::White);
     credits.setFont(*font);
     buttons["CREDITS"] = credits;
     
     simulacra::Button quit(context->getWindow()->getSize().x / 3, MAIN_MENU_X_POS + 128 * 5,
-                           SIZE, "Quit",
+						   CHARACTER_SIZE, "Quit",
                            sf::Color::White, sf::Color::Red, sf::Color::White);
     quit.setFont(*font);
     buttons["QUIT"] = quit;
@@ -54,7 +54,7 @@ void MenuState::init() {
     backgroundImage.setScale(2.5f, 3.f);
 
     gameTitle.setFont(*font);
-    gameTitle.setCharacterSize(SIZE + SIZE);
+    gameTitle.setCharacterSize(CHARACTER_SIZE * 2);
     gameTitle.setOrigin((2 * gameTitle.getPosition().x + gameTitle.getGlobalBounds().width) / 2,
                         (2 * gameTitle.getPosition().y + gameTitle.getGlobalBounds().height) / 2);
     gameTitle.setPosition(context->getWindow()->getSize().x / 3, -100);
