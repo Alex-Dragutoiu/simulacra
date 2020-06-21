@@ -13,17 +13,14 @@ GameEngine::~GameEngine() {
 
 void GameEngine::init() {
     std::vector<sf::VideoMode> VideoModes = sf::VideoMode::getFullscreenModes();
-    window = std::make_shared<sf::RenderWindow>(sf::VideoMode(VideoModes[0].width,
-                                                              VideoModes[0].height,
-                                                              VideoModes[0].bitsPerPixel),
-                                                name,
-                                                sf::Style::Fullscreen);
+    window = std::make_shared<sf::RenderWindow>(sf::VideoMode(VideoModes[0].width, VideoModes[0].height, VideoModes[0].bitsPerPixel),
+                                                name, sf::Style::Fullscreen);
     
     /* Set window's frame limit */
     window->setFramerateLimit(60);
 
     /* add state to the state manager */
-    stateManager.addState(std::make_unique<MenuState>(this));
+    stateManager.addState(std::make_unique<EditorState>(this));
     
     /* initialise ImGui */
     ImGui::SFML::Init(*window);

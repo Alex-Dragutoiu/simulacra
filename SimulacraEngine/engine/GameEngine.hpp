@@ -17,6 +17,11 @@
 
 class State;
 
+struct GameData {
+    StateManager stateManager;
+    sf::RenderWindow window;
+};
+
 class GameEngine {
 private:
     /* manages states */

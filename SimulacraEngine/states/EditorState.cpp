@@ -8,7 +8,7 @@
 
 #include "EditorState.hpp"
 
-EditorState::EditorState(GameEngine* context) : player(0, -1000) {
+EditorState::EditorState(GameEngine* context) : player(0, 1000) {
 	this->context = context;
 	init();
 

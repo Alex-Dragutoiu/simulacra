@@ -182,7 +182,7 @@ void FileSystemView::loadResourcePaths() {
     dirent* entry;
     DIR* dir;
     
-    resources.insert("res", DT_DIR, NONE);
+    resources.insert("Resources", DT_DIR, NONE);
     
     std::stack<std::pair<std::string, std::string>> q;
     q.push(std::make_pair("Resources", "Resources/"));

@@ -18,31 +18,26 @@
 
 #include "../engine/GameEngine.hpp"
 #include "../utilities/AssetLoader.hpp"
+#include "../views/FileSystemView.hpp"
 
 #include "../defines.h"
 
 class GameEngine;
 
 class MenuState : public State {
-    // Variables
 private:
     GameEngine* context;
     
     std::shared_ptr<sf::Font> font;
-    sf::Text gameTitle;
-    sf::Text studioTitle;
-    
-    // TextBox* textBox;
     
     std::shared_ptr<sf::Texture> texture;
     sf::Sprite backgroundImage;
     
+    sf::Text gameTitle;
+    sf::Text studioTitle;
+
     std::unordered_map<std::string, simulacra::Button> buttons;
-    
-//    simulacra::Button start;
-//    simulacra::Button options;
-//    simulacra::Button credits;
-//    simulacra::Button quit;
+
 private:
     void initButtons();
     
