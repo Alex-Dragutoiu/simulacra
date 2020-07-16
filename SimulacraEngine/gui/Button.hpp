@@ -12,6 +12,7 @@
 #include "../enums.h"
 
 namespace simulacra {
+    
     class Button {
     private:
         ButtonState state;

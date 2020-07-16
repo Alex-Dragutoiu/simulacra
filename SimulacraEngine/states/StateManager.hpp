@@ -8,23 +8,68 @@
 
 #pragma once
 
+#include "State.hpp"
+#include "StateEnums.h"
+#include "../ResourceIdentifiers.h"
+
+#include <SFML/System/NonCopyable.hpp>
+
 #include <iostream>
 #include <memory>
 #include <vector>
+#include <functional>
 
-#include "State.hpp"
+namespace simulacra {
 
-typedef std::unique_ptr<State> state;
-
-class StateManager {
-private:
-    std::vector<state> states;
+    class StateManager : private sf::NonCopyable {
+    public:
+        enum class Action {
+            PUSH,
+            POP,
+            CLEAR
+        };
+        
+    public:
+        struct PendingAction {
+            explicit PendingAction(Action action, States id = States::NONE);
+            
+            Action action;
+            States id;
+        };
+        
+        template <typename T>
+        void registerState(States stateID);
+        
+        void addState(States stateID);
+        void removeState();
+        void clearStates();
+        
+        void handleEvents(const sf::Event& event);
+        void update(const sf::Time& dt);
+        void draw(std::shared_ptr<sf::RenderWindow>& target);
+        
+        void applyChange();
+        
+        bool empty();
+        
+        StateManager(State::Context context);
+        ~StateManager();
+        
+    private:
+        std::vector<std::unique_ptr<State>> stack;
+        std::vector<PendingAction> pendingActions;
+        std::map<States, std::function<std::unique_ptr<State>()>> factories;
+        State::Context context;
     
-public:
-    void addState(state newState);
-    void removeState();
-    State& getCurrentState();
+    private:
+        std::unique_ptr<State> createState(States stateID);
+
+    };
     
-    StateManager();
-    ~StateManager();
-};
+    template <typename T>
+    void StateManager::registerState(States stateID) {
+        factories[stateID] = [this] () {
+            return std::unique_ptr<State>(new T(*this, context));
+        };
+    }
+}

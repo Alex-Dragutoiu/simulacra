@@ -7,26 +7,48 @@
 //
 #pragma once
 
-#include <iostream>
 #include <memory>
+
+#include "StateEnums.h"
+#include "../ResourceIdentifiers.h"
+#include "../utilities/AssetLoader.hpp"
+
 #include <SFML/Graphics.hpp>
 
-/* state interface */
-class State {
-public:
-    virtual void init() = 0;
+namespace simulacra {
     
-    /* The three important actions within a game loop */
-    virtual void handleEvents(sf::Event& event) = 0;
-    virtual void draw(std::shared_ptr<sf::RenderWindow>& target) = 0;
-    virtual void update(const sf::Time& dt) = 0;
+    class StateManager;
     
-    virtual ~State() {
+    class State {
+    public:
+        struct Context {
+            Context(sf::RenderWindow& window, TextureLoader& textures, FontLoader& fonts);
+            
+            sf::RenderWindow* window;
+            TextureLoader* textures;
+            FontLoader* fonts;
+        };
         
+    public:
+        virtual void init() = 0;
+        
+        /* The three important actions within a game loop */
+        virtual void handleEvents(const sf::Event& event) = 0;
+        virtual void draw(std::shared_ptr<sf::RenderWindow>& target) = 0;
+        virtual void update(const sf::Time& dt) = 0;
+        
+        State(StateManager& stateManager, Context context);
+        virtual ~State() { };
+        
+    protected:
+        Context getContext() const;
+        
+        void reqStatePush(States state);
+        void reqStatePop();
+        void reqClear();
+        
+    private:
+        StateManager* stateManager;
+        Context context;
     };
-    
-    virtual std::string toString() {
-        return "State";
-    };
-};
-
+}

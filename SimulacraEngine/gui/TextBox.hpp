@@ -37,7 +37,6 @@ namespace simulacra {
         std::string getText();
         
         void draw(const std::shared_ptr<sf::RenderWindow>& target);
-        //    void draw(sf::RenderTarget* target);
         void typed(const sf::Vector2f& mousePos, const sf::Event& event);
     };
 }

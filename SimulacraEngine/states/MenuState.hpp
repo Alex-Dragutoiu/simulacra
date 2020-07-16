@@ -7,7 +7,6 @@
 //
 #pragma once
 
-#include <iostream>
 #include <memory>
 
 #include "State.hpp"
@@ -16,48 +15,44 @@
 #include "../gui/Button.hpp"
 #include "../gui/TextBox.hpp"
 
-#include "../engine/GameEngine.hpp"
 #include "../utilities/AssetLoader.hpp"
 
 #include "../defines.h"
 
-class GameEngine;
-
-class MenuState : public State {
-    // Variables
-private:
-    GameEngine* context;
+namespace simulacra {
     
-    std::shared_ptr<sf::Font> font;
-    sf::Text gameTitle;
-    sf::Text studioTitle;
-    
-    // TextBox* textBox;
-    
-    std::shared_ptr<sf::Texture> texture;
-    sf::Sprite backgroundImage;
-    
-    std::unordered_map<std::string, simulacra::Button> buttons;
-    
-//    simulacra::Button start;
-//    simulacra::Button options;
-//    simulacra::Button credits;
-//    simulacra::Button quit;
-private:
-    void initButtons();
-    
-public:
-    void init() override;
-    
-    // The three important actions within a game loop
-    void handleEvents(sf::Event& event) override;
-    void draw(std::shared_ptr<sf::RenderWindow>& target) override;
-    void update(const sf::Time& dt) override;
-    
-    std::string toString() override;
-    
-    MenuState(GameEngine* context);
-    ~MenuState();
-};
-
-
+    class MenuState : public State {
+    public:
+        /* menu options */
+        enum class Options {
+            START,
+            SETTINGS,
+            CREDITS,
+            QUIT
+        };
+        
+    private:
+        std::shared_ptr<sf::Font> font;
+        sf::Text gameTitle;
+        sf::Text studioTitle;
+        
+        std::shared_ptr<sf::Texture> texture;
+        sf::Sprite backgroundImage;
+        
+        std::unordered_map<Options, Button> buttons;
+        
+    private:
+        void initButtons();
+        
+    public:
+        void init() override;
+        
+        // The three important actions within a game loop
+        void handleEvents(const sf::Event& event) override;
+        void draw(std::shared_ptr<sf::RenderWindow>& target) override;
+        void update(const sf::Time& dt) override;
+        
+        MenuState(StateManager& stateManager, Context context);
+        ~MenuState();
+    };
+}

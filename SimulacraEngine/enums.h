@@ -8,6 +8,7 @@
 #pragma once
 
 namespace simulacra {
+    
     enum ButtonState {
         BTN_IDLE = 0,
         BTN_HOVER,
@@ -19,4 +20,5 @@ namespace simulacra {
         LEFT,
         RIGHT
     };
+    
 }

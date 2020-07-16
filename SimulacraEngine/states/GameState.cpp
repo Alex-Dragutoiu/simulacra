@@ -8,53 +8,50 @@
 
 #include "GameState.hpp"
 
-GameState::GameState(GameEngine* context) {
-    this->context = context;
-    init();
-}
-
-GameState::~GameState() {
-
-}
-
-void GameState::init() {
-	view.setCenter(context->getWindow()->getSize().x / 2, context->getWindow()->getSize().y / 2);
-}
-
-void GameState::handleEvents(sf::Event& event) {
-    /* process events for ImGUI */
-    ImGui::SFML::ProcessEvent(event);
+namespace simulacra {
     
-    if (event.type == sf::Event::KeyPressed) {
-        switch (event.key.code) {
-            case sf::Keyboard::A:
-                
-                break;
-            case sf::Keyboard::D:
-                
-                break;
-            case sf::Keyboard::Escape:
-                context->getWindow()->close();
-                break;
-            default:
-                break;
+    GameState::GameState(StateManager& stateManager, Context context) : State(stateManager, context) {
+        init();
+    }
+
+    GameState::~GameState() { }
+
+    void GameState::init() {
+        view.setCenter(getContext().window->getSize().x / 2, getContext().window->getSize().y / 2);
+    }
+
+    void GameState::handleEvents(const sf::Event& event) {
+        /* process events for ImGUI */
+        ImGui::SFML::ProcessEvent(event);
+        
+        if (event.type == sf::Event::KeyPressed) {
+            switch (event.key.code) {
+                case sf::Keyboard::A:
+                    
+                    break;
+                case sf::Keyboard::D:
+                    
+                    break;
+                case sf::Keyboard::Escape:
+                    getContext().window->close();
+                    break;
+                default:
+                    break;
+            }
         }
     }
-}
 
-void GameState::draw(std::shared_ptr<sf::RenderWindow>& target) {
-    // get the current mouse position in the window
-    sf::Vector2i pixelPos = sf::Mouse::getPosition(*context->getWindow());
-    
-    // convert it to world coordinates
-    sf::Vector2f worldPos = context->getWindow()->mapPixelToCoords(pixelPos);
-    
-}
+    void GameState::draw(std::shared_ptr<sf::RenderWindow>& target) {
+        // get the current mouse position in the window
+        sf::Vector2i pixelPos = sf::Mouse::getPosition(*getContext().window);
+        
+        // convert it to world coordinates
+        sf::Vector2f worldPos = getContext().window->mapPixelToCoords(pixelPos);
+        
+    }
 
-void GameState::update(const sf::Time& dt) {
-    
-}
+    void GameState::update(const sf::Time& dt) {
+        
+    }
 
-std::string GameState::toString() {
-    return "GameState";
 }
