@@ -15,10 +15,14 @@ namespace simulacra {
         BTN_PRESSED
     };
     
-    enum MovementState {
-        IDLE = 0,
+    enum class Action {
+        NONE,
+        IDLE,
+        IDLE_LEFT,
+        IDLE_RIGHT,
         LEFT,
-        RIGHT
+        RIGHT,
+        ATTACK_RIGHT,
     };
     
 }

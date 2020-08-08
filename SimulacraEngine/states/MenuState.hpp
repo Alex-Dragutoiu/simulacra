@@ -32,11 +32,9 @@ namespace simulacra {
         };
         
     private:
-        std::shared_ptr<sf::Font> font;
         sf::Text gameTitle;
         sf::Text studioTitle;
         
-        std::shared_ptr<sf::Texture> texture;
         sf::Sprite backgroundImage;
         
         std::unordered_map<Options, Button> buttons;

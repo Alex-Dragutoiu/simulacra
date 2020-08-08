@@ -19,29 +19,29 @@ namespace simulacra {
         sf::Font& font = getContext().fonts->get(Fonts::MENU_FONT);
         
         Button start(getContext().window->getSize().x / 3, MAIN_MENU_X_POS + 128 * 2,
-                                CHARACTER_SIZE, "Start",
-                                sf::Color::White, sf::Color::Red, sf::Color::White);
+                     CHARACTER_SIZE, "Start",
+                     sf::Color::White, sf::Color::Red, sf::Color::White);
         
         start.setFont(font);
         buttons[Options::START] = start;
         
         
         Button settings(getContext().window->getSize().x / 3, MAIN_MENU_X_POS + 128 * 3,
-                                   CHARACTER_SIZE, "Settings",
-                                   sf::Color::White, sf::Color::Red, sf::Color::White);
+                        CHARACTER_SIZE, "Settings",
+                        sf::Color::White, sf::Color::Red, sf::Color::White);
         settings.setFont(font);
         buttons[Options::SETTINGS] = settings;
         
         
         Button credits(getContext().window->getSize().x / 3, MAIN_MENU_X_POS + 128 * 4,
-                                  CHARACTER_SIZE, "Credits",
-                                  sf::Color::White, sf::Color::Red, sf::Color::White);
+                       CHARACTER_SIZE, "Credits",
+                       sf::Color::White, sf::Color::Red, sf::Color::White);
         credits.setFont(font);
         buttons[Options::CREDITS] = credits;
         
         Button quit(getContext().window->getSize().x / 3, MAIN_MENU_X_POS + 128 * 5,
-                               CHARACTER_SIZE, "Quit",
-                               sf::Color::White, sf::Color::Red, sf::Color::White);
+                    CHARACTER_SIZE, "Quit",
+                    sf::Color::White, sf::Color::Red, sf::Color::White);
         quit.setFont(font);
         buttons[Options::QUIT] = quit;
     }
@@ -87,6 +87,19 @@ namespace simulacra {
     void MenuState::handleEvents(const sf::Event& event) {
         if (buttons[Options::QUIT].isPressed()) {
             reqStatePop();
+        }
+        
+        if (buttons[Options::START].isPressed()) {
+            reqStatePop();
+            reqStatePush(States::GAME_STATE);
+        }
+        
+        if (buttons[Options::CREDITS].isPressed()) {
+            
+        }
+        
+        if (buttons[Options::SETTINGS].isPressed()) {
+            
         }
     }
 

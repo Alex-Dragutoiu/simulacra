@@ -13,7 +13,15 @@
 namespace simulacra {
     
     enum class Textures {
-        PLAYER,
+        DEFAULT_ENTITY,
+        
+        PLAYER_IDLE_LEFT,
+        PLAYER_IDLE_RIGHT,
+        PLAYER_LEFT,
+        PLAYER_RIGHT,
+        PLAYER_ATTACK_RIGHT,
+        PLAYER_ATTACK_LEFT,
+        
         MENU_BACKGROUND,
     };
     

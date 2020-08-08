@@ -26,15 +26,25 @@ namespace simulacra {
         /* Set window's frame limit */
         window->setFramerateLimit(60);
 
-        /* initalise fonts and textures */
+        /* initalise fonts */
         fontLoader.load(Fonts::MENU_FONT, "Resources/fonts/TextPixelFont.ttf");
+        
+        /* initalise textures */
         textureLoader.load(Textures::MENU_BACKGROUND, "Resources/backgrounds/main_menu/mainmenu.jpg");
+        textureLoader.load(Textures::DEFAULT_ENTITY, "Resources/entities/default.png");
+        
+        textureLoader.load(Textures::PLAYER_IDLE_LEFT, "Resources/entities/player/idle_left.png");
+        textureLoader.load(Textures::PLAYER_IDLE_RIGHT, "Resources/entities/player/idle_right.png");
+        
+        textureLoader.load(Textures::PLAYER_LEFT, "Resources/entities/player/run_left.png");
+        textureLoader.load(Textures::PLAYER_RIGHT, "Resources/entities/player/run_right.png");
+        textureLoader.load(Textures::PLAYER_ATTACK_RIGHT, "Resources/entities/player/attack_right.png");
         
         /* initialise the state manager */
         stateManager = std::make_shared<StateManager>(State::Context(*window, textureLoader, fontLoader));
         registerStates();
         
-        /* add state to the state manager */
+        /* add the initial state to the state manager */
         stateManager->addState(States::MENU_STATE);
         
         /* initialise ImGui */
@@ -128,8 +138,6 @@ namespace simulacra {
     }
 
     void GameEngine::eventHandler() {
-        sf::Event event;
-
         /* process events for ImGUI */
         ImGui::SFML::ProcessEvent(event);
         

@@ -12,12 +12,22 @@
 
 #include "State.hpp"
 
+#include "../entities/Entity.hpp"
+#include "../entities/GameObject.hpp"
+
+#include "../components/SpriteComponent/SpriteComponent.hpp"
+#include "../components/AnimationComponent/AnimationComponent.hpp"
+#include "../components/TransformationComponent/TransformationComponent.hpp"
+#include "../components/MovementComponent/MovementComponent.hpp"
+#include "../components/CameraComponent/CameraComponent.hpp"
+
 namespace simulacra {
     
     class GameState : public State {
     private:
-        sf::View view;
+        std::shared_ptr<sf::View> view;
         sf::Texture background;
+        std::shared_ptr<Entity> player;
         
     public:
         void init() override;
