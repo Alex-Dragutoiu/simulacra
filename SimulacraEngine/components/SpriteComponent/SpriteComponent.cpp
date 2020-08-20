@@ -16,7 +16,7 @@ namespace simulacra {
         this->texture = texture;
         
         sprite.setTexture(*texture);
-        sprite.scale(4.f, 4.f);
+        sprite.scale(5.f, 5.f);
         sprite.setPosition(transformation_c->getPosition());
     }
     

@@ -22,6 +22,7 @@ namespace simulacra {
         PLAYER_ATTACK_RIGHT,
         PLAYER_ATTACK_LEFT,
         
+        MAP,
         MENU_BACKGROUND,
     };
     

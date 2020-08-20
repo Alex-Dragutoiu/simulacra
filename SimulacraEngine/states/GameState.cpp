@@ -10,38 +10,37 @@
 
 namespace simulacra {
     
-    GameState::GameState(StateManager& stateManager, Context context) : State(stateManager, context) {
+    GameState::GameState(StateManager& stateManager, Context context) : State(stateManager, context), gridMap(22, 16, 2.f, sf::Vector2u(64, 63)), tileMap(22, 16) {
         init();
     }
 
     GameState::~GameState() { }
 
     void GameState::init() {
-        view = std::make_shared<sf::View>();
-        view->setCenter(getContext().window->getSize().x / 2, getContext().window->getSize().y / 2);
+        isGridActive = false;
         
-        player = std::make_shared<Entity>();
+        view = std::make_shared<sf::View>(getContext().window->getDefaultView());
         
-        player->setHealth(100.f);
-        player->setDamage(45.f);
-        player->setArmor(4.f);
-        player->setMana(100.f);
-        player->setSpeed(295.f);
+        auto& player = objects.addObject();
         
         /* add components to the player */
-        player->addComponent<TransformationComponent>(100.f, 100.f);
-        player->addComponent<SpriteComponent>(&getContext().textures->get(Textures::DEFAULT_ENTITY));
-        player->addComponent<CameraComponent>(view);
+        player.addComponent<TransformationComponent>(100.f, 1100.f);
+        player.addComponent<SpriteComponent>(&getContext().textures->get(Textures::DEFAULT_ENTITY));
+        player.addComponent<CameraComponent>(view);
 
-        auto animation_c = player->addComponent<AnimationComponent>(.05f);
+        auto animation_c = player.addComponent<AnimationComponent>(.05f);
         animation_c->addAnimation(Action::IDLE_LEFT, &getContext().textures->get(Textures::PLAYER_IDLE_LEFT), 200, 200);
         animation_c->addAnimation(Action::IDLE_RIGHT, &getContext().textures->get(Textures::PLAYER_IDLE_RIGHT), 200, 200);
         animation_c->addAnimation(Action::LEFT, &getContext().textures->get(Textures::PLAYER_LEFT), 200, 200);
         animation_c->addAnimation(Action::RIGHT, &getContext().textures->get(Textures::PLAYER_RIGHT), 200, 200);
         animation_c->addAnimation(Action::ATTACK_RIGHT, &getContext().textures->get(Textures::PLAYER_ATTACK_RIGHT), 200, 200);
         
-        player->addComponent<MovementComponent>(player->getSpeed());
+        player.addComponent<MovementComponent>(295.f);
         
+        stats.addModel(&player);
+        
+        tileMap.load(getContext().textures->get(Textures::MAP), sf::Vector2u(64, 63));
+        tileMap.setScale(2.f, 2.f);
     }
 
     void GameState::handleEvents(const sf::Event& event) {
@@ -50,6 +49,9 @@ namespace simulacra {
                 case sf::Keyboard::Escape:
                     getContext().window->close();
                     break;
+                case sf::Keyboard::G:
+                    isGridActive = !isGridActive;
+                    break;
                 default:
                     break;
             }
@@ -57,11 +59,16 @@ namespace simulacra {
     }
 
     void GameState::draw(std::shared_ptr<sf::RenderWindow>& target) {
-        player->draw(*target);
+        target->draw(tileMap);
+        gridMap.draw(*target, isGridActive);
+        
+        objects.draw(*target);
+        stats.draw(true);
     }
 
     void GameState::update(const sf::Time& dt) {
-        player->update(dt);
+        getContext().window->setView(*view);
+        objects.update(dt);
     }
 
 }

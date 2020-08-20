@@ -51,9 +51,11 @@ namespace simulacra {
     void MovementComponent::move(const float dt, const float xDir, const float yDir) {
         
         float newPosX = transformation_c->getPosition().x + dt * xDir * velocity;
+        float newPosY = transformation_c->getPosition().y + dt * yDir * velocity;
         
         /* Only allow player to move on positive X axis */
         if (newPosX >= 0) {
+            transformation_c->setPosition(newPosX, newPosY);
             sprite_c->move(dt * xDir * velocity, dt * yDir * velocity);
         }
     }

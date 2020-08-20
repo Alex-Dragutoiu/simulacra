@@ -20,6 +20,10 @@
 #include "../components/TransformationComponent/TransformationComponent.hpp"
 #include "../components/MovementComponent/MovementComponent.hpp"
 #include "../components/CameraComponent/CameraComponent.hpp"
+#include "../map/Map.hpp"
+#include "../map/GridMap.hpp"
+
+#include "../views/HierarchyView.hpp"
 
 namespace simulacra {
     
@@ -27,7 +31,15 @@ namespace simulacra {
     private:
         std::shared_ptr<sf::View> view;
         sf::Texture background;
-        std::shared_ptr<Entity> player;
+        
+        ObjectManager objects;
+        
+        Map tileMap;
+        GridMap gridMap;
+        
+        bool isGridActive;
+        
+        HierarchyView stats;
         
     public:
         void init() override;

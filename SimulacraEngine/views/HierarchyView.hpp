@@ -12,28 +12,35 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "../entities/GameObject.hpp"
+#include "../components/TransformationComponent/TransformationComponent.hpp"
+
 #include "imgui.h"
 #include "imgui-SFML.h"
 
-class HierarchyView {
-// Variables
-private:
-    std::vector<std::string> states;
-    
-    int selected;
-    
-    // Methods
-private:
-    void drawHierarchy();
-    void drawListOfObjectsToAdd();
-    
-public:
-    void draw(bool isOpen);
-    
-    HierarchyView();
-    ~HierarchyView();
-};
-
+namespace simulacra {
+    class HierarchyView {
+    // Variables
+    private:
+        GameObject* player;
+        int selected;
+        
+        // Methods
+    private:
+        void drawHierarchy();
+        void drawListOfObjectsToAdd();
+        
+    public:
+        void draw(bool isOpen);
+        
+        void addModel(GameObject* player) {
+            this->player = player;
+        };
+        
+        HierarchyView();
+        ~HierarchyView();
+    };
+}
 //    const char* names[9] = {
 //        "A", "B", "C",
 //        "D", "E", "F",

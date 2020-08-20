@@ -15,7 +15,7 @@ namespace simulacra {
         position.y = 0;
     }
 
-    TransformationComponent::TransformationComponent(GameObject* owner, const sf::Vector2f& position) : Component(owner) {
+    TransformationComponent::TransformationComponent(GameObject* owner, const sf::Vector2f& position, const sf::Vector2f& scale) : Component(owner) {
         this->position = position;
     }
 

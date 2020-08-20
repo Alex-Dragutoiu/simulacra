@@ -10,7 +10,7 @@
 
 namespace simulacra {
 
-    CameraComponent::CameraComponent(GameObject* owner, const std::shared_ptr<sf::View>& camera) : Component(owner) {
+    CameraComponent::CameraComponent(GameObject* owner, std::shared_ptr<sf::View> camera) : Component(owner) {
         this->camera = camera;
         transformation = owner->getComponent<TransformationComponent>();
 
@@ -18,15 +18,17 @@ namespace simulacra {
          * Apply camera boundary given player initial position
          */
         if (transformation->getPosition().x < camera->getCenter().x / 2) {
-            camera->setCenter(camera->getCenter());
+            camera->setCenter(camera->getCenter().x, transformation->getPosition().y);
         } else {
-            camera->setCenter(transformation->getPosition().x, camera->getCenter().y);
+            camera->setCenter(transformation->getPosition());
         }
+        
     }
 
     CameraComponent::~CameraComponent() { }
 
     void CameraComponent::update(const sf::Time& dt) {
+
         if (transformation->getPosition().x >= camera->getSize().x / 2) {
             camera->setCenter(transformation->getPosition());
         }

@@ -16,7 +16,7 @@ namespace simulacra {
     
     class CameraComponent : public Component {
     public:
-        CameraComponent(GameObject* owner, const std::shared_ptr<sf::View>& camera);
+        CameraComponent(GameObject* owner, std::shared_ptr<sf::View> camera);
         ~CameraComponent();
 
         void update(const sf::Time& dt) override;

@@ -4,10 +4,7 @@
 
 namespace simulacra {
     
-    GameEngine::GameEngine(int width, int height, std::string name) {
-        this->width = width;
-        this->height = height;
-        this->name = name;
+    GameEngine::GameEngine(std::string name) : name(name) {
         init();
     }
 
@@ -24,7 +21,7 @@ namespace simulacra {
                                                     sf::Style::Fullscreen);
         
         /* Set window's frame limit */
-        window->setFramerateLimit(60);
+        window->setFramerateLimit(30);
 
         /* initalise fonts */
         fontLoader.load(Fonts::MENU_FONT, "Resources/fonts/TextPixelFont.ttf");
@@ -39,6 +36,8 @@ namespace simulacra {
         textureLoader.load(Textures::PLAYER_LEFT, "Resources/entities/player/run_left.png");
         textureLoader.load(Textures::PLAYER_RIGHT, "Resources/entities/player/run_right.png");
         textureLoader.load(Textures::PLAYER_ATTACK_RIGHT, "Resources/entities/player/attack_right.png");
+        
+        textureLoader.load(Textures::MAP, "Resources/tileset.png");
         
         /* initialise the state manager */
         stateManager = std::make_shared<StateManager>(State::Context(*window, textureLoader, fontLoader));
@@ -169,7 +168,6 @@ namespace simulacra {
         stateManager->draw(window);
         
         /* draw Views */
-        statesView.draw(true);
         
         ImGui::SFML::Render(*window);
         

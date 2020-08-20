@@ -15,9 +15,9 @@
 
 #include "../states/StateManager.hpp"
 
-#include "../views/HierarchyView.hpp"
 #include "../enums.h"
 #include "../utilities/AssetLoader.hpp"
+#include "../entities/ObjectManager.hpp"
 
 namespace simulacra {
     
@@ -26,6 +26,8 @@ namespace simulacra {
         /* resource managers */
         TextureLoader textureLoader;
         FontLoader fontLoader;
+        
+        /* objects */
         
         /* manages states */
         std::shared_ptr<StateManager> stateManager;
@@ -36,13 +38,9 @@ namespace simulacra {
         sf::Event event;
         sf::Time dt;
         
-        /* window specifics */
-        int width;
-        int height;
         std::string name;
         
         /* views */
-        HierarchyView statesView;
         
     private:
         void registerStates();
@@ -59,7 +57,7 @@ namespace simulacra {
         void draw();
         
         // constructors and destructors
-        GameEngine(int width, int height, std::string name);
+        GameEngine(std::string name);
         ~GameEngine();
     };
 }

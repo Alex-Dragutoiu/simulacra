@@ -7,43 +7,52 @@
 //
 #include "HierarchyView.hpp"
 
-HierarchyView::HierarchyView() {
-    states.push_back("MenuState");
-    selected = 0;
-}
-
-HierarchyView::~HierarchyView() { }
-
-void HierarchyView::drawListOfObjectsToAdd() {
-    ImGui::BeginChild("AddObjects", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()), true);
+namespace simulacra {
     
-    ImGui::EndChild();
-    ImGui::Button("Add");
-}
+    HierarchyView::HierarchyView() {
+        selected = 0;
+    }
 
-void HierarchyView::drawHierarchy() {
+    HierarchyView::~HierarchyView() { }
+
+    void HierarchyView::drawListOfObjectsToAdd() {
+        ImGui::BeginChild("AddObjects", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()), true);
+        
+        ImGui::EndChild();
+        ImGui::Button("Add");
+    }
+
+    void HierarchyView::drawHierarchy() {
+        
+    //        ImGui::BeginChild("states", ImVec2(0, states.size() * 50), true);
+    //            for (int i = 0; i < states.size(); i++) {
+    //                if (ImGui::Selectable(states[i].c_str(), selected == i, ImGuiSelectableFlags_AllowDoubleClick)) {
+    //                    selected = i;
+    //                    if (ImGui::IsMouseDoubleClicked(0)) {
+    //                    }
+    //                }
+    //            }
+    //        ImGui::EndChild();
+    }
+
+    void HierarchyView::draw(bool isOpen) {
+        /* Transparent background */
+        ImGui::SetNextWindowBgAlpha(0.8f);
+        
+        auto transformation_c = player->getComponent<TransformationComponent>();
+        
+        ImGui::Begin("Player", &isOpen);
+            ImGui::SetWindowFontScale(2.f);
+        
+            ImGui::Text("Transformation Component");
+            ImGui::BulletText("X:%.2f, Y:%.2f", transformation_c->getPosition().x, transformation_c->getPosition().y);
+        
+            ImGui::Separator();
+        
+        ImGui::End();
+    }
+}
     
-    ImGui::BeginChild("states", ImVec2(0, states.size() * 50), true);
-        for (int i = 0; i < states.size(); i++) {
-            if (ImGui::Selectable(states[i].c_str(), selected == i, ImGuiSelectableFlags_AllowDoubleClick)) {
-                selected = i;
-                if (ImGui::IsMouseDoubleClicked(0)) {
-                }
-            }
-        }
-    ImGui::EndChild();
-}
-
-void HierarchyView::draw(bool isOpen) {
-    /* Transparent background */
-    ImGui::SetNextWindowBgAlpha(0.8f);
-    
-    ImGui::Begin("States", &isOpen);
-        ImGui::SetWindowFontScale(2.f);
-        drawHierarchy();
-    ImGui::End();
-}
-
 //if (ImGui::TreeNode("Drag and Drop")) {
 //    if (ImGui::TreeNode("Drag and drop to copy/swap items")) {
 //        enum Mode {

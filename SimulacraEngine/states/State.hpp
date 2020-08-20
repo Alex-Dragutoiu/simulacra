@@ -12,6 +12,7 @@
 #include "StateEnums.h"
 #include "../ResourceIdentifiers.h"
 #include "../utilities/AssetLoader.hpp"
+#include "../entities/ObjectManager.hpp"
 
 #include <SFML/Graphics.hpp>
 

@@ -18,7 +18,7 @@ namespace simulacra {
     class TransformationComponent : public Component {
     public:        
         TransformationComponent(GameObject* owner, const float& x, const float& y);
-        TransformationComponent(GameObject* owner, const sf::Vector2f& position);
+        TransformationComponent(GameObject* owner, const sf::Vector2f& position, const sf::Vector2f& scale);
         TransformationComponent(GameObject* owner);
         ~TransformationComponent() = default;
         
@@ -26,7 +26,12 @@ namespace simulacra {
         void setPosition(const float& x, const float& y);
         sf::Vector2f getPosition();
         
+        void setScale(const sf::Vector2f& scale);
+        void setScale(const float& x, const float& y);
+        sf::Vector2f getScale();
+        
     private:
         sf::Vector2f position;
+        sf::Vector2f scale;
     };
 }

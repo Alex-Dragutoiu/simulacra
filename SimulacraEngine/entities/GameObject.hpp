@@ -16,9 +16,12 @@ namespace simulacra {
     
     class Component;
     
+    using ObjectID = uint32_t;
+    
     class GameObject {
     public:
-        GameObject() = default;
+        GameObject() { };
+        
         virtual ~GameObject() { }
         
         template <typename T, typename... U>
@@ -56,10 +59,20 @@ namespace simulacra {
             return nullptr;
         };
         
-        virtual void update(const sf::Time& dt) = 0;
-        virtual void draw(sf::RenderTarget& target) = 0;
+        virtual void update(const sf::Time& dt);
+        virtual void draw(sf::RenderTarget& target);
+        
+        bool isAlive() const;
+        void dispose();
+        
+        ObjectID getInstanceID();
         
     protected:
         std::vector<std::shared_ptr<Component>> components;
+        
+    private:
+        ObjectID id;
+        
+        bool alive { true };
     };
 }
