@@ -11,7 +11,7 @@
 
 namespace simulacra {
     
-    State::Context::Context(sf::RenderWindow& window, TextureLoader& textures, FontLoader& fonts) : window(&window), textures(&textures), fonts(&fonts) {
+    State::Context::Context(sf::RenderWindow& window, TextureLoader& textures, FontLoader& fonts, ECS::ECSManager& ecs) : window(&window), textures(&textures), fonts(&fonts), ecs(&ecs) {
         
     }
     

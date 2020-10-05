@@ -39,15 +39,60 @@ namespace simulacra {
         /* Transparent background */
         ImGui::SetNextWindowBgAlpha(0.8f);
         
-        auto transformation_c = player->getComponent<TransformationComponent>();
-        
-        ImGui::Begin("Player", &isOpen);
-            ImGui::SetWindowFontScale(2.f);
-        
-            ImGui::Text("Transformation Component");
-            ImGui::BulletText("X:%.2f, Y:%.2f", transformation_c->getPosition().x, transformation_c->getPosition().y);
-        
-            ImGui::Separator();
+//        auto transformation_c = player->getComponent<TransformationComponent>();
+//
+//        auto collider_c = player->getComponent<CollisionComponent>();
+//        auto& box = collider_c->getRect();
+//
+//        auto camera_c = player->getComponent<CameraComponent>();
+//        auto& camera = camera_c->getCamera();
+//
+//        auto sprite_c = player->getComponent<SpriteComponent>();
+//        auto sprite = sprite_c->getImage();
+//
+//        auto animation_c = player->getComponent<AnimationComponent>();
+//
+//        ImGui::Begin("Player", &isOpen);
+//            ImGui::SetWindowFontScale(2.f);
+//
+//            ImGui::Text("Transformation Component");
+//            ImGui::InputFloat("xPos", &transformation_c->getPosition().x, 1.f, 2000.f, "%.2f");
+//            ImGui::InputFloat("yPos", &transformation_c->getPosition().y, 1.f, 2000.f, "%.2f");
+//
+//            ImGui::Separator();
+//
+//            ImGui::Text("Collision Component");
+//            ImGui::InputFloat("x", &box.left, 1.f, 1000.f, "%.2f");
+//            ImGui::InputFloat("y", &box.top, 1.f, 1000.f, "%.2f");
+//            ImGui::Separator();
+//            ImGui::InputFloat("width", &box.width, 1.f, 800.f, "%.2f");
+//            ImGui::InputFloat("height", &box.height, 1.f, 800.f, "%.2f");
+//
+//            ImGui::Separator();
+//            ImGui::Text("Camera Component");
+//
+//            auto x = camera.getCenter().x;
+//            auto y = camera.getCenter().y;
+//
+//            ImGui::InputFloat("Camera x", &x, 1.f, 1000.f, "%.2f");
+//            ImGui::InputFloat("Camera y", &y, 1.f, 1000.f, "%.2f");
+//
+//            ImGui::Separator();
+//            ImGui::Text("Sprite Component");
+//
+//            sf::IntRect textureDimensions = sprite.getTextureRect();
+//
+//            ImGui::BeginChild("image", ImVec2(416.f, 416.f), true);
+//            sprite.setScale(401.f / textureDimensions.width, 401.f / textureDimensions.height);
+//            ImGui::Image(sprite);
+//            ImGui::EndChild();
+//
+//            ImGui::Separator();
+//            ImGui::Text("Movement Component");
+//
+//            ImGui::Separator();
+//            ImGui::Text("Animation Component");
+//
         
         ImGui::End();
     }

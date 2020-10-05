@@ -12,7 +12,8 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../defines.h"
+#define BACKSPACE 8
+#define ENTER 10
 
 namespace simulacra {
     class TextBox {

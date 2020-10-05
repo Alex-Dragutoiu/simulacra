@@ -12,7 +12,7 @@
 #include "StateEnums.h"
 #include "../ResourceIdentifiers.h"
 #include "../utilities/AssetLoader.hpp"
-#include "../entities/ObjectManager.hpp"
+#include "../ECS/ECS.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -23,11 +23,12 @@ namespace simulacra {
     class State {
     public:
         struct Context {
-            Context(sf::RenderWindow& window, TextureLoader& textures, FontLoader& fonts);
+            Context(sf::RenderWindow& window, TextureLoader& textures, FontLoader& fonts, ECS::ECSManager& ecs);
             
             sf::RenderWindow* window;
             TextureLoader* textures;
             FontLoader* fonts;
+            ECS::ECSManager* ecs;
         };
         
     public:

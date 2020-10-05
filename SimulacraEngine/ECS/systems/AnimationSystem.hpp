@@ -1,16 +1,19 @@
 //
-//  Animation.hpp
+//  AnimationSystem.hpp
 //  SimulacraEngine
 //
-//  Created by Alex Dragutoiu on 09/06/2020.
+//  Created by Alex Dragutoiu on 05/10/2020.
 //  Copyright © 2020 Alex Dragutoiu. All rights reserved.
 //
+
 #pragma once
 
-#include <iostream>
-#include <SFML/Graphics.hpp>
+#include "System.hpp"
 
-namespace simulacra {
+#include <unordered_map>
+
+namespace ECS {
+    
     class Animation {
     public:
         Animation(sf::Texture* animSheet, int noOfFrames, const int& width, const int& height, const double& delay);
@@ -50,6 +53,30 @@ namespace simulacra {
         sf::Texture* animSheet;
         
         std::shared_ptr<sf::IntRect> current;
-
+    };
+    
+    
+    class AnimationSystem : public UpdateSystem {
+    public:
+        AnimationSystem(const EntityList& list);
+        
+        void addAnimation(Action action, sf::Texture* animation, const int& width, const int& height);
+        Animation& getAnimation(Action action);
+        
+        bool isPlaying() {
+            return isPlayingAnim;
+        }
+        
+        void play(Action& action, const sf::Time& dt);
+        void pause(Action action);
+        void reset(Action action);
+        
+    private:
+        double delay;
+        double elapsedTime;
+        
+        bool isPlayingAnim;
+        
+        std::unordered_map<Action, std::unique_ptr<Animation>> animations;
     };
 }

@@ -14,6 +14,7 @@ namespace simulacra {
         NONE,
         INTRO_STATE,
         MENU_STATE,
+        EDITOR_STATE,
         SETTINGS_STATE,
         OPTIONS_STATE,
         GAME_STATE,

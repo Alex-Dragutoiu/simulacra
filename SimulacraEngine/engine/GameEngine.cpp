@@ -12,41 +12,34 @@ namespace simulacra {
         ImGui::SFML::Shutdown();
     }
 
-    void GameEngine::init() {
+    void GameEngine::initWindow() {
         std::vector<sf::VideoMode> VideoModes = sf::VideoMode::getFullscreenModes();
         window = std::make_shared<sf::RenderWindow>(sf::VideoMode(VideoModes[0].width,
                                                                   VideoModes[0].height,
                                                                   VideoModes[0].bitsPerPixel),
                                                     name,
                                                     sf::Style::Fullscreen);
-        
         /* Set window's frame limit */
         window->setFramerateLimit(30);
-
+    }
+    
+    void GameEngine::initResouces() {
         /* initalise fonts */
         fontLoader.load(Fonts::MENU_FONT, "Resources/fonts/TextPixelFont.ttf");
         
         /* initalise textures */
         textureLoader.load(Textures::MENU_BACKGROUND, "Resources/backgrounds/main_menu/mainmenu.jpg");
         textureLoader.load(Textures::DEFAULT_ENTITY, "Resources/entities/default.png");
-        
         textureLoader.load(Textures::PLAYER_IDLE_LEFT, "Resources/entities/player/idle_left.png");
         textureLoader.load(Textures::PLAYER_IDLE_RIGHT, "Resources/entities/player/idle_right.png");
-        
         textureLoader.load(Textures::PLAYER_LEFT, "Resources/entities/player/run_left.png");
         textureLoader.load(Textures::PLAYER_RIGHT, "Resources/entities/player/run_right.png");
         textureLoader.load(Textures::PLAYER_ATTACK_RIGHT, "Resources/entities/player/attack_right.png");
         
         textureLoader.load(Textures::MAP, "Resources/tileset.png");
-        
-        /* initialise the state manager */
-        stateManager = std::make_shared<StateManager>(State::Context(*window, textureLoader, fontLoader));
-        registerStates();
-        
-        /* add the initial state to the state manager */
-        stateManager->addState(States::MENU_STATE);
-        
-        /* initialise ImGui */
+    }
+    
+    void GameEngine::initImGui() {
         ImGui::SFML::Init(*window);
         
         ImGuiStyle* style = &ImGui::GetStyle();
@@ -60,7 +53,7 @@ namespace simulacra {
         style->ItemInnerSpacing = ImVec2(8, 6);
         
         style->IndentSpacing = 25.0f;
-    
+        
         style->ScrollbarSize = 15.0f;
         style->ScrollbarRounding = 15.0f;
         
@@ -119,6 +112,23 @@ namespace simulacra {
         style->Colors[ImGuiCol_TextSelectedBg] = ImVec4(0.25f, 1.00f, 0.00f, 0.43f);
         style->Colors[ImGuiCol_ModalWindowDarkening] = ImVec4(1.00f, 0.98f, 0.95f, 0.73f);
     }
+    
+    void GameEngine::init() {
+        initWindow();
+        initResouces();
+        
+        /* initialise the state manager */
+        stateManager = std::make_shared<StateManager>(State::Context(*window, textureLoader, fontLoader, manager));
+        stateManager->clearStates();
+        registerStates();
+        
+        /* add the initial state to the state manager */
+        stateManager->addState(States::MENU_STATE);
+        
+        /* initialise ImGui */
+        initImGui();
+
+    }
 
     /* This method runs the game loop */
     void GameEngine::run() {
@@ -153,9 +163,10 @@ namespace simulacra {
     void GameEngine::update() {
         dt = clock.getElapsedTime();
         
-        stateManager->update(dt);
-        
         ImGui::SFML::Update(*window, dt);
+        
+        manager.update(dt.asSeconds());
+        stateManager->update(dt);
         
         clock.restart();
     }
@@ -166,6 +177,7 @@ namespace simulacra {
         
         /* draw the current state */
         stateManager->draw(window);
+        manager.draw(*window);
         
         /* draw Views */
         
@@ -176,6 +188,7 @@ namespace simulacra {
     }
     
     void GameEngine::registerStates() {
+        stateManager->registerState<EditorState>(States::EDITOR_STATE);
         stateManager->registerState<MenuState>(States::MENU_STATE);
         stateManager->registerState<GameState>(States::GAME_STATE);
     }

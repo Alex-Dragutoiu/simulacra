@@ -17,7 +17,12 @@
 
 #include "../utilities/AssetLoader.hpp"
 
-#include "../defines.h"
+#define CHARACTER_SIZE 128
+#define MAIN_MENU_X_POS 40
+#define MAIN_MENU_Y_POS 0
+
+#define GAME_TITLE "SIMULACRA"
+#define STUDIO_NAME "Gameopath Studios"
 
 namespace simulacra {
     

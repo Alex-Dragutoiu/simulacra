@@ -12,15 +12,14 @@
 
 #include "State.hpp"
 
-#include "../entities/Entity.hpp"
-#include "../entities/GameObject.hpp"
+//#include "../entities/GameObject.hpp"
+//#include "../components/SpriteComponent/SpriteComponent.hpp"
+//#include "../components/AnimationComponent/AnimationComponent.hpp"
+//#include "../components/TransformationComponent/TransformationComponent.hpp"
+//#include "../components/MovementComponent/MovementComponent.hpp"
+//#include "../components/CameraComponent/CameraComponent.hpp"
 
-#include "../components/SpriteComponent/SpriteComponent.hpp"
-#include "../components/AnimationComponent/AnimationComponent.hpp"
-#include "../components/TransformationComponent/TransformationComponent.hpp"
-#include "../components/MovementComponent/MovementComponent.hpp"
-#include "../components/CameraComponent/CameraComponent.hpp"
-#include "../map/Map.hpp"
+#include "../map/MapParser.hpp"
 #include "../map/GridMap.hpp"
 
 #include "../views/HierarchyView.hpp"
@@ -32,10 +31,11 @@ namespace simulacra {
         std::shared_ptr<sf::View> view;
         sf::Texture background;
         
-        ObjectManager objects;
+        // ObjectManager objects;
         
-        Map tileMap;
         GridMap gridMap;
+        
+        MapParser map;
         
         bool isGridActive;
         

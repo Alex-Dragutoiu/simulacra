@@ -12,9 +12,6 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../entities/GameObject.hpp"
-#include "../components/TransformationComponent/TransformationComponent.hpp"
-
 #include "imgui.h"
 #include "imgui-SFML.h"
 
@@ -22,7 +19,6 @@ namespace simulacra {
     class HierarchyView {
     // Variables
     private:
-        GameObject* player;
         int selected;
         
         // Methods
@@ -32,10 +28,6 @@ namespace simulacra {
         
     public:
         void draw(bool isOpen);
-        
-        void addModel(GameObject* player) {
-            this->player = player;
-        };
         
         HierarchyView();
         ~HierarchyView();

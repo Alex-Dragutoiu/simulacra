@@ -10,6 +10,10 @@
 #include "utilities/AssetLoader.hpp"
 #include <SFML/Graphics.hpp>
 
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
+
 namespace simulacra {
     
     enum class Textures {
@@ -26,9 +30,30 @@ namespace simulacra {
         MENU_BACKGROUND,
     };
     
+    // map Textures values to JSON as strings
+    NLOHMANN_JSON_SERIALIZE_ENUM(Textures, {
+        {Textures::DEFAULT_ENTITY, "default_entity"},
+        
+        {Textures::PLAYER_IDLE_LEFT, "player_idle_left"},
+        {Textures::PLAYER_IDLE_RIGHT, "player_idle_right"},
+        {Textures::PLAYER_LEFT, "player_left"},
+        {Textures::PLAYER_RIGHT, "player_right"},
+        {Textures::PLAYER_ATTACK_RIGHT, "player_attack_right"},
+        {Textures::PLAYER_ATTACK_LEFT, "player_attack_left"},
+        
+        {Textures::MAP, "map"},
+        {Textures::MENU_BACKGROUND, "menu_background"},
+    });
+    
     enum class Fonts {
         MENU_FONT
     };
+    
+    // map Fonts values to JSON as strings
+    NLOHMANN_JSON_SERIALIZE_ENUM(Fonts, {
+        {Fonts::MENU_FONT, "menu_font"},
+    });
+    
     
     template <typename Resource, typename Identifier>
     class AssetLoader;

@@ -17,7 +17,8 @@
 
 #include "../enums.h"
 #include "../utilities/AssetLoader.hpp"
-#include "../entities/ObjectManager.hpp"
+
+#include "../ECS/ECS.h"
 
 namespace simulacra {
     
@@ -27,20 +28,21 @@ namespace simulacra {
         TextureLoader textureLoader;
         FontLoader fontLoader;
         
-        /* objects */
-        
         /* manages states */
         std::shared_ptr<StateManager> stateManager;
         
         std::shared_ptr<sf::RenderWindow> window;
         
+        /* Entity Component System */
+        ECS::ECSManager manager;
+        
+        /* utils */
         sf::Clock clock;
         sf::Event event;
         sf::Time dt;
         
+        /* name of application */
         std::string name;
-        
-        /* views */
         
     private:
         void registerStates();
@@ -50,6 +52,9 @@ namespace simulacra {
         void run();
         
         void init();
+        void initWindow();
+        void initResouces();
+        void initImGui();
         
         // game loop methods
         void eventHandler();
