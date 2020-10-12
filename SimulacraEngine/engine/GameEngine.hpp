@@ -17,6 +17,7 @@
 
 #include "../enums.h"
 #include "../utilities/AssetLoader.hpp"
+#include "../parsers/Parser.hpp"
 
 #include "../ECS/ECS.h"
 
@@ -27,6 +28,8 @@ namespace simulacra {
         /* resource managers */
         TextureLoader textureLoader;
         FontLoader fontLoader;
+        
+        EngineStyleParser parser;
         
         /* manages states */
         std::shared_ptr<StateManager> stateManager;

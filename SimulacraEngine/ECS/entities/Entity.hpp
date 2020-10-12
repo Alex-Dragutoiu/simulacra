@@ -39,8 +39,8 @@ namespace ECS {
             // The object does not have this component so we create it and
             // add it to our list.
             std::shared_ptr<T> newComponent = std::make_shared<T>(this->getInstanceID(), std::forward<TArgs>(args)...);
-            components[utils::getComponentTypeID<T>()] = newComponent;
-            compBitmask[utils::getComponentTypeID<T>()] = true;
+            components[getComponentTypeID<T>()] = newComponent;
+            compBitmask[getComponentTypeID<T>()] = true;
             
             newComponent->toString();
             
@@ -50,7 +50,7 @@ namespace ECS {
         template <typename T>
         inline std::shared_ptr<T> getComponent() {
             static_assert(std::is_base_of<Component, T>::value, "T must derive from Component!");
-            return std::dynamic_pointer_cast<T>(components[utils::getComponentTypeID<T>()]);
+            return std::dynamic_pointer_cast<T>(components[getComponentTypeID<T>()]);
         };
         
         template <typename T>
@@ -59,8 +59,8 @@ namespace ECS {
             
             for (size_t i = 0; i < components.size(); ++i) {
                 if (std::dynamic_pointer_cast<T>(components[i])) {
-                    components[utils::getComponentTypeID<T>()] = nullptr;
-                    compBitmask[utils::getComponentTypeID<T>()] = false;
+                    components[getComponentTypeID<T>()] = nullptr;
+                    compBitmask[getComponentTypeID<T>()] = false;
                     std::cout << "Deleted Component " << typeid(T).name() << " of Entity " << getInstanceID() << std::endl;
                     return true;
                 }
@@ -71,7 +71,7 @@ namespace ECS {
         
         template <typename T>
         inline bool hasComponent() const {
-            return compBitmask[utils::getComponentTypeID<T>()];
+            return compBitmask[getComponentTypeID<T>()];
         }
         
         EntityID getInstanceID();

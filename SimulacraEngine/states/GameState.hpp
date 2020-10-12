@@ -22,13 +22,15 @@
 #include "../map/MapParser.hpp"
 #include "../map/GridMap.hpp"
 
-#include "../views/HierarchyView.hpp"
+#include "../views/ECSView.hpp"
 
 namespace simulacra {
     
     class GameState : public State {
     private:
         std::shared_ptr<sf::View> view;
+        std::shared_ptr<ECSView> ecsView;
+        
         sf::Texture background;
         
         // ObjectManager objects;
@@ -39,15 +41,13 @@ namespace simulacra {
         
         bool isGridActive;
         
-        HierarchyView stats;
-        
     public:
         void init() override;
         
         // The three important actions within a game loop
         void handleEvents(const sf::Event& event) override;
         void draw(std::shared_ptr<sf::RenderWindow>& target) override;
-        void update(const sf::Time& dt) override;
+        void update(const float& dt) override;
         
         // Constructors & Destructors
         GameState(StateManager& stateManager, Context context);

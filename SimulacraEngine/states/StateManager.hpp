@@ -45,7 +45,7 @@ namespace simulacra {
         void clearStates();
         
         void handleEvents(const sf::Event& event);
-        void update(const sf::Time& dt);
+        void update(const float& dt);
         void draw(std::shared_ptr<sf::RenderWindow>& target);
         
         void applyChange();

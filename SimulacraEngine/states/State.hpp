@@ -37,7 +37,7 @@ namespace simulacra {
         /* The three important actions within a game loop */
         virtual void handleEvents(const sf::Event& event) = 0;
         virtual void draw(std::shared_ptr<sf::RenderWindow>& target) = 0;
-        virtual void update(const sf::Time& dt) = 0;
+        virtual void update(const float& dt) = 0;
         
         State(StateManager& stateManager, Context context);
         virtual ~State() { };

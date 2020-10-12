@@ -9,13 +9,9 @@
 #include "Entity.hpp"
 
 namespace ECS {
-    Entity::Entity(EntityID id) : id(id) {
-        infoLog("Created Entity with ID ", id);
-    }
+    Entity::Entity(EntityID id) : id(id) { }
     
-    Entity::~Entity() {
-        infoLog("Destroyed Entity with ID ", id);
-    }
+    Entity::~Entity() { }
     
     EntityID Entity::getInstanceID() {
         return id;

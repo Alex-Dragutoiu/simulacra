@@ -9,6 +9,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <string>
 
 template <typename C>
 sf::VertexArray rectangle(C x, C y, C width, C height, sf::Color colour) {
@@ -30,6 +31,7 @@ sf::VertexArray rectangle(C x, C y, C width, C height, sf::Color colour) {
 
     return rect;
 }
+
 
 //std::string getWorkingDir() {
 //    return "Resources/";

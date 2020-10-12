@@ -8,8 +8,6 @@
 
 #pragma once
 
-#define infoLog(string, x) std::cout << string << x << std::endl
-
 namespace ECS {
     
     class Entity;
@@ -36,19 +34,15 @@ namespace ECS {
         ATTACK_RIGHT,
     };
     
-    namespace utils {
-        
-        inline ComponentTypeID getUniqueComponentID() {
-            static ComponentTypeID lastID = 0;
-            return lastID++;
-        }
-        
-        template <typename T>
-        inline ComponentTypeID getComponentTypeID() noexcept {
-            static_assert(std::is_base_of<Component, T>::value, "T does not derive from Component!");
-            static const ComponentTypeID typeID = getUniqueComponentID();
-            return typeID;
-        }
+    inline ComponentTypeID getUniqueComponentID() {
+        static ComponentTypeID lastID = 0;
+        return lastID++;
     }
-    
+        
+    template <typename T>
+    inline ComponentTypeID getComponentTypeID() noexcept {
+        static_assert(std::is_base_of<Component, T>::value, "T does not derive from Component!");
+        static const ComponentTypeID typeID = getUniqueComponentID();
+        return typeID;
+    }
 }

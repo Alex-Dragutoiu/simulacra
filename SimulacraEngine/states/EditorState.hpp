@@ -12,8 +12,6 @@
 
 #include "State.hpp"
 
-#include "../utilities/QuadTree.hpp"
-
 namespace simulacra {
     
     class EditorState : public State {
@@ -23,14 +21,14 @@ namespace simulacra {
         // The three important actions within a game loop
         void handleEvents(const sf::Event& event) override;
         void draw(std::shared_ptr<sf::RenderWindow>& target) override;
-        void update(const sf::Time& dt) override;
+        void update(const float& dt) override;
         
         // Constructors & Destructors
         EditorState(StateManager& stateManager, Context context);
         ~EditorState();
         
     private:
-        std::shared_ptr<QuadTree<Point>> tree;
+//        std::shared_ptr<QuadTree<Point>> tree;
 
     };
 }

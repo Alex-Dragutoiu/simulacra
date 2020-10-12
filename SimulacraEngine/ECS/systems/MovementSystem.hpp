@@ -15,7 +15,8 @@ namespace ECS {
     public:
         MovementSystem(const EntityList& list);
         virtual void update(const float& dt) override;
-            
+        
+    private:
         Action action;
         Action lastAction;
     };

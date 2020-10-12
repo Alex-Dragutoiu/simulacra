@@ -11,6 +11,7 @@
 #include <memory>
 
 #include <SFML/Graphics.hpp>
+#include "../ECS/ECS.h"
 
 #include "imgui.h"
 #include "imgui-SFML.h"
@@ -20,6 +21,7 @@ namespace simulacra {
     // Variables
     private:
         int selected;
+        std::shared_ptr<ECS::ECSManager> manager;
         
         // Methods
     private:

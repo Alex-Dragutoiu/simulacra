@@ -72,7 +72,7 @@ namespace simulacra {
         target->draw(gameTitle);
     }
 
-    void MenuState::update(const sf::Time& dt) {
+    void MenuState::update(const float& dt) {
         // get the current mouse position in the window
         sf::Vector2i pixelPos = sf::Mouse::getPosition(*getContext().window);
         

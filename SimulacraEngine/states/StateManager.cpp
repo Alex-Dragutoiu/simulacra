@@ -73,11 +73,13 @@ namespace simulacra {
         }
     }
     
-    void StateManager::update(const sf::Time& dt) {
+    void StateManager::update(const float& dt) {
+        applyChange();
         if (!stack.empty()) {
             stack.back()->update(dt);
+        } else {
+            context.window->close();
         }
-        applyChange();
     }
     
     bool StateManager::empty() {

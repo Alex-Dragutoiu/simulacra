@@ -53,7 +53,7 @@ namespace simulacra {
         // The three important actions within a game loop
         void handleEvents(const sf::Event& event) override;
         void draw(std::shared_ptr<sf::RenderWindow>& target) override;
-        void update(const sf::Time& dt) override;
+        void update(const float& dt) override;
         
         MenuState(StateManager& stateManager, Context context);
         ~MenuState();

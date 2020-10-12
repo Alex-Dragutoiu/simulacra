@@ -15,13 +15,20 @@ namespace ECS {
         for (auto& entity : entities) {
             if (entity->hasComponent<SpriteComponent>() && entity->hasComponent<TransformationComponent>() && entity->hasComponent<VelocityComponent>()) {
                 auto velocity = entity->getComponent<VelocityComponent>()->velocity;
-            
+                auto transComp = entity->getComponent<TransformationComponent>();
+                
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-                    entity->getComponent<TransformationComponent>()->move(dt * -1.f * velocity, 0.f);
-                    action = Action::LEFT; // this should be sent as an event to the animation system
+                    transComp->move(dt * -1.f * velocity, 0.f);
+                    if (entity->hasComponent<ColliderComponent>()) {
+                        auto colliderComp = entity->getComponent<ColliderComponent>();
+                        colliderComp->move(dt * -1 * velocity, 0.f);
+                    }
                 } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-                    entity->getComponent<TransformationComponent>()->move(dt * 1.f * velocity, 0.f);
-                    action = Action::RIGHT; // this should be sent as an event to the animation system
+                    transComp->move(dt * 1.f * velocity, 0.f);
+                    if (entity->hasComponent<ColliderComponent>()) {
+                        auto colliderComp = entity->getComponent<ColliderComponent>();
+                        colliderComp->move(dt * 1 * velocity, 0.f);
+                    }
                 }
             }
         }

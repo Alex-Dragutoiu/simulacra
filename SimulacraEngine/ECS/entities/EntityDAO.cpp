@@ -9,8 +9,7 @@
 #include "EntityDAO.hpp"
 
 namespace ECS {
-    EntityDAOImpl::EntityDAOImpl() {
-    }
+    EntityDAOImpl::EntityDAOImpl() { }
     
     std::shared_ptr<Entity> EntityDAOImpl::get(EntityID id) {
         assert(id < MAX_ENTITIES && id >= 0);

@@ -23,13 +23,27 @@ namespace simulacra {
         auto ecs = getContext().ecs;
         
         ecs->addEntity(0);
-        
         ecs->addComponent<ECS::TransformationComponent>(0, sf::Vector2f { 100.f, 1100.f }, sf::Vector2f { 10.f, 10.f }, 1.5f);
         ecs->addComponent<ECS::SpriteComponent>(0, getContext().textures->get(Textures::DEFAULT_ENTITY));
         ecs->addComponent<ECS::VelocityComponent>(0, 295.f);
+        ecs->addComponent<ECS::ColliderComponent>(0, sf::FloatRect(361.f, 1240.f, 99.f, 281.f));
+    
+        ecs->addEntity(1);
+        ecs->addComponent<ECS::TransformationComponent>(1, sf::Vector2f { 700.f, 1100.f }, sf::Vector2f { 10.f, 10.f }, 1.5f);
+        ecs->addComponent<ECS::SpriteComponent>(1, getContext().textures->get(Textures::DEFAULT_ENTITY));
+        ecs->addComponent<ECS::ColliderComponent>(1, sf::FloatRect(960.f, 1240.f, 99.f, 281.f));
         
-        ecs->addDrawSystem<ECS::RenderSystem>();
+//        animComp->addAnimation("IDLE", &getContext().textures->get(Textures::PLAYER_IDLE_LEFT), 200, 200);
+//        animComp->addAnimation("IDLE", &getContext().textures->get(Textures::PLAYER_IDLE_RIGHT), 200, 200);
+//        animComp->addAnimation("LEFT", &getContext().textures->get(Textures::PLAYER_LEFT), 200, 200);
+//        animComp->addAnimation("RIGHT", &getContext().textures->get(Textures::PLAYER_RIGHT), 200, 200);
+//        animComp->addAnimation("ATTACK_RIGHT", &getContext().textures->get(Textures::PLAYER_ATTACK_RIGHT), 200, 200);
+        
         ecs->addUpdateSystem<ECS::MovementSystem>();
+        ecs->addUpdateSystem<ECS::CollisionSystem>();
+        ecs->addDrawSystem<ECS::RenderSystem>();
+        
+        ecsView = std::make_shared<ECSView>(*ecs);
         
         map.loadFromJSON("map.json");
     }
@@ -50,12 +64,13 @@ namespace simulacra {
     }
 
     void GameState::draw(std::shared_ptr<sf::RenderWindow>& target) {
+        ecsView->draw(true);
         map.draw(*target);
         gridMap.draw(*target, isGridActive);
-        // stats.draw(true);
+        
     }
 
-    void GameState::update(const sf::Time& dt) {
+    void GameState::update(const float& dt) {
         getContext().window->setView(*view);
     }
 

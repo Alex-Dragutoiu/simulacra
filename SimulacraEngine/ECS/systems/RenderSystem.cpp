@@ -21,6 +21,9 @@ namespace ECS {
                 spriteComp->m_sprite.setScale(transComp->scale);
                 
                 target.draw(spriteComp->m_sprite);
+                
+                auto colliderComp = entity->getComponent<ColliderComponent>();
+                colliderComp->draw(target);
             }
         }
     }

@@ -18,7 +18,7 @@ namespace simulacra {
     EditorState::~EditorState() { }
 
     void EditorState::init() {
-        tree = std::make_shared<QuadTree<Point>>(sf::FloatRect{0, 0, static_cast<float>(getContext().window->getSize().x), static_cast<float>(getContext().window->getSize().y)}, 4);
+//        tree = std::make_shared<QuadTree<Point>>(sf::FloatRect{0, 0, static_cast<float>(getContext().window->getSize().x), static_cast<float>(getContext().window->getSize().y)}, 4);
     }
     
     void EditorState::handleEvents(const sf::Event& event) {
@@ -34,17 +34,17 @@ namespace simulacra {
             }
         }
 
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            sf::Vector2i position = sf::Mouse::getPosition(*getContext().window);
-            tree->insert({static_cast<float>(position.x), static_cast<float>(position.y)});
-        }
+//        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+//            sf::Vector2i position = sf::Mouse::getPosition(*getContext().window);
+//            tree->insert({static_cast<float>(position.x), static_cast<float>(position.y)});
+//        }
     }
 
     void EditorState::draw(std::shared_ptr<sf::RenderWindow>& target) {
-        tree->draw(*target);
+//        tree->draw(*target);
     }
 
-    void EditorState::update(const sf::Time& dt) {
+    void EditorState::update(const float& dt) {
         
     }
 }

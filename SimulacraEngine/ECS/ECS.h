@@ -22,10 +22,14 @@ namespace ECS {
     public:
         ECSManager() {
             entityDAO = std::make_unique<EntityDAOImpl>();
+            availableIDs.resize(1000);
+            for (int i = 0; i < availableIDs.size(); ++i) { availableIDs[i] = true; }
         }
         
         inline Entity& addEntity(EntityID entityID) {
+            availableIDs[entityID] = false;
             return entityDAO->add(entityID);
+    
         }
         
         inline std::shared_ptr<Entity> getEntity(EntityID entityID) {
@@ -34,6 +38,7 @@ namespace ECS {
         
         inline void delEntity(EntityID entityID) {
             entityDAO->del(entityID);
+            availableIDs[entityID] = true;
         }
         
         inline EntityList getAllEntities() {
@@ -43,9 +48,7 @@ namespace ECS {
         template <typename T, typename... TArgs>
         inline std::shared_ptr<T> addComponent(EntityID entityID, TArgs&&... args) {
             static_assert(std::is_base_of<Component, T>::value, "T must derive from Component");
-            
             assert(entityDAO->get(entityID) != nullptr && "Entity already exists");
-            infoLog("Added Component to Entity", entityID);
             
             return entityDAO->get(entityID)->addComponent<T>(std::forward<TArgs>(args)...);
         };
@@ -59,7 +62,6 @@ namespace ECS {
         template <typename T>
         inline bool delComponent(EntityID entityID) {
             static_assert(std::is_base_of<Component, T>::value, "T must derive from Component!");
-            infoLog("Deleted Component from Entity", entityID);
             return entityDAO->get(entityID)->delComponent<T>();
         }
         
@@ -97,9 +99,21 @@ namespace ECS {
             }
         }
 
+        std::queue<EntityID> getAvailableIDs() {
+            std::queue<EntityID> available;
+            
+            for (int i = 0; i < availableIDs.size(); ++i) {
+                if (availableIDs[i] == true) {
+                    available.push(i);
+                }
+            }
+            
+            return available;
+        }
+        
     private:
         std::unique_ptr<EntityDAOImpl> entityDAO;
-
+        std::vector<bool> availableIDs;
         std::vector<std::unique_ptr<DrawSystem>> drawSystems;
         std::vector<std::unique_ptr<UpdateSystem>> updateSystems;
     };
